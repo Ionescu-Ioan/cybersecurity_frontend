@@ -1,0 +1,7 @@
+@font-face {
+    font-family: "fontello"; /* Replace with your Fontello font name */
+    src: url("../fonts/fontello.woff2") format("woff2"),
+         url("../fonts/fontello.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
