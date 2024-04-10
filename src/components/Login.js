@@ -12,12 +12,20 @@ function Login(props) {
 
     const onButtonClick = () => {
       setClicked(true);
-      fetch('localhost:8000/login', {headers: {'Content-Type': 'application/json'}, method: 'POST', 
-      body: JSON.stringify({
-        username : email,
-        password : password
-      })
-      }).then((data)=>{console.log(data)});
+      fetch('/login', 
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin':'*'
+
+        }, 
+        method: 'POST', 
+        mode: "cors",
+        body: JSON.stringify({
+          username : email,
+          password : password
+        })
+      }).then((data)=>data.json()).then((json)=>console.log(json));
 
       }
     
