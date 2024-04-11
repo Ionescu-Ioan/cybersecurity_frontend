@@ -1,4 +1,4 @@
-/* Login.css */
+/* Register.css */
 @import url("https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;500;600;700;800;900&display=swap");
 @import url("https://fonts.googleapis.com/css?family=Raleway");
 
@@ -20,6 +20,7 @@ body {
   font-family: "Raleway", sans-serif; 
 }
 
+/* Other global styles... */
 
 .mainContainer {
     display: flex;
@@ -71,6 +72,56 @@ body {
     }
 }
 
+
+
+/* @media only screen and (max-width: 320px) {
+    .mainContainer, .ButtonContainer, .inputContainer{
+        width: 80vw;
+        height: 90vh;
+        hr {
+        margin-bottom: 0.3rem;
+        }
+        h4 {
+        font-size: small;
+        }
+    }
+}
+@media only screen and (min-width: 360px) {
+    .mainContainer, .ButtonContainer, .inputContainer{
+        width: 80vw;
+        height: 90vh;
+        h4 {
+        font-size: small;
+        }
+    }
+}
+@media only screen and (min-width: 411px) {
+    .mainContainer, .ButtonContainer, .inputContainer{
+        width: 80vw;
+        height: 90vh;
+    }
+}
+@media only screen and (min-width: 768px) {
+    .mainContainer, .ButtonContainer, .inputContainer{
+        width: 80vw;
+        height: 80vh;
+    }
+}
+@media only screen and (min-width: 1024px) {
+    .mainContainer, .ButtonContainer, .inputContainer{
+        width: 70vw;
+        height: 50vh;
+    }
+}
+@media only screen and (min-width: 1280px) {
+    .mainContainer, .ButtonContainer, .inputContainer{
+        width: 30vw;
+        height: 80vh;
+    }
+} */
+
+
+
 .inputContainer { 
   display: flex;
   flex-direction: column;
@@ -89,8 +140,7 @@ body {
   justify-content: space-around;
 }
 
-
-.LoginText {
+.RegisterText {
   margin: 3rem 0 2rem 0;
   font-size: 1.5rem;
 }
@@ -120,8 +170,9 @@ body {
   }
 }
 
-.LoginButton,
-.LoginButton:after {
+
+.RegisterButton,
+.RegisterButton:after {
   border-radius: 50px 50px;
   margin: 0.1rem;
   display: flex;
@@ -145,7 +196,7 @@ body {
   touch-action: manipulation;
 }
 
-.LoginButton:after {
+.RegisterButton:after {
   --slice-0: inset(50% 50% 50% 50%);
   --slice-1: inset(80% -6px 0 0);
   --slice-2: inset(50% -6px 30% 0);
@@ -165,16 +216,12 @@ body {
   clip-path: var(--slice-0);
 }
 
-.LoginButton:hover {
+.RegisterButton:hover {
   cursor:pointer;
 }
-.LoginButton:hover:after {
+.RegisterButton:hover:after {
   animation: 1s glitch;
   animation-timing-function: steps(2, end);
-}
-
-.password-icon:hover{
-  cursor: pointer;
 }
 
 .RegisterContainer {
@@ -186,8 +233,8 @@ body {
   justify-content: space-around;
   color: #CE94DE;
   font-size: 0.7rem; 
-  margin-top: 10px; 
-  margin-bottom: 20px;
+  /*margin-top: 10px; 
+  margin-bottom: 20px; */
 }
 
   
@@ -240,16 +287,14 @@ body {
 }
 
 @media (min-width: 768px) {
-  .LoginButton,
-  .LoginButton:after {
+  .RegisterButton,
+  .RegisterButton:after {
     width: 160px;
     height: 69px;
     line-height: 71px;
   }
 }
 
-.RegisterLink {
-  text-decoration: none;
-  color: #3b2576;
-  font-style: italic;
+.password-icon:hover{
+    cursor: pointer;
 }

@@ -25,7 +25,9 @@ function App() {
     // </div>
 
 
-   <Login test = {'mesaj'}/>
+   //<Login test = {'mesaj'}/>
+   //<Register test = {'mesaj'}/>
+   <Home test = {'mesaj'}/>
 
   );
 }

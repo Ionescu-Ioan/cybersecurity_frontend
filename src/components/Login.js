@@ -7,7 +7,7 @@ import {eye} from 'react-icons-kit/feather/eye'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClapperboard } from '@fortawesome/free-solid-svg-icons';
 
-function Login(props) {
+function Login (props) {
 
     const [clicked, setClicked] = useState(false);
     const [email, setEmail] = useState('');
@@ -51,13 +51,10 @@ function Login(props) {
       }  
 
     return (
-    // <div>
-    //     Login component {props.test} {clicked ? 'pressed' : 'unpressed'}
-    //     <button onClick={handleClick}>buton</button>
-    // </div>
+
     <div className={'mainContainer'}>
       <div className={'titleContainer'}>
-        <div className={'LoginText'}>WELCOME{' '}<FontAwesomeIcon icon={faClapperboard} style={{ marginRight: '5px' }} /></div>
+        <div className={'LoginText'}>WELCOME!{' '}<FontAwesomeIcon icon={faClapperboard} style={{ marginRight: '5px' }} /></div>
       </div>
       <br />
       <div className={'inputContainer'}>
@@ -87,7 +84,6 @@ function Login(props) {
 
       <br />
       <div className={'ButtonContainer'}>
-        {/* <input className={'LoginButton'} type="button" onClick={onButtonClick} value={'Log in'} /> */}
         <button className="LoginButton" onClick={onButtonClick}>LOGIN</button>
       </div>
       <div className={'RegisterContainer'}>
