@@ -59,21 +59,25 @@ function Home (props) {
 
   return (
     <div className="home-container">
-      <h1>Movie Library</h1>
-      <div className="search-bar">
-        <input
-          type="text"
-          placeholder="Search Movies"
-          value={searchText}
-          onChange={handleSearch}
-        />
-      </div>
-      <div className="sort-bar">
-        <select value={sortBy} onChange={handleSortChange}>
-          <option value="none">Sort By</option>
-          <option value="title">Title</option>
-          <option value="date">Release Date</option>
-        </select>
+      <div className="top-bar">
+        <h1>Movie Library</h1>
+        <div className="search-and-sort">
+          <input
+            type="text"
+            placeholder="Search Movies"
+            value={searchText}
+            onChange={handleSearch}
+            className="search-input"
+          />
+          <select value={sortBy} onChange={handleSortChange} className="sort-select">
+            <option value="none">Sort By</option>
+            <option value="title">Title</option>
+            <option value="date">Release Date</option>
+          </select>
+        </div>
+        <button onClick={handleGoToLibrary} className="library-button">
+          Go to your library
+        </button>
       </div>
       <div className="movie-list">
         {filteredMovies.map((movie) => (
@@ -86,7 +90,6 @@ function Home (props) {
           </Link>
         ))}
       </div>
-      <button onClick={handleGoToLibrary}>Go to Library</button>
     </div>
   );
 
