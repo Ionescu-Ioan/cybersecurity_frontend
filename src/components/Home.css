@@ -5,7 +5,7 @@ body {
 .home-container {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: stretch;
   padding: 20px;
 
   @media only screen and (max-width: 320px) {
@@ -60,8 +60,10 @@ body {
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
-  margin-right: 10px; /* Add some space between search bar and sort dropdown */
+  margin-right: 10px;
+  max-width: calc(100% - 200px); /* Adjust as needed */
 }
+
 
 .sort-select {
   padding: 5px;
@@ -150,8 +152,7 @@ body {
 }
 
 .library-button:hover {
-  /*transform: scale(1.125); /* Add a subtle hover effect */
-  transition: 0.2s ease-out, transform 0.2s ease-in-out; /* Separate transitions */
+  transition: 0.2s ease-out, transform 0.2s ease-in-out; 
 }
 
 .library-button:hover::after {
@@ -164,6 +165,50 @@ body {
 }
 
 .library-button:hover:before {
-  /* Optionally adjust the before element on hover */
-  opacity: 0.8; /* Slightly reduce overlay opacity */
+  opacity: 0.8;
 }
+
+.sort-label {
+  font-weight: bold;
+  font-size: 16px;
+  margin-right: 10px;
+  color: #333; /* Adjust color as needed */
+}
+
+.sort-select {
+  padding: 8px 12px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+  color: #333; /* Adjust color as needed */
+  cursor: pointer;
+}
+
+/* Hover effect */
+.sort-select:hover {
+  border-color: #999;
+}
+
+/* Focus effect */
+.sort-select:focus {
+  outline: none;
+  border-color: #555;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 20px;
+  background-color: #f1dca2;
+  border-radius: 10px;
+  padding: 10px 20px;
+}
+
+.top-bar > * { /* Target all direct children of .top-bar */
+  flex: 1; /* Make elements flexible and grow to fill space */
+}
+

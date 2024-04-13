@@ -8,7 +8,7 @@ function Home (props) {
   const [allMovies, setAllMovies] = useState([]);
   const [filteredMovies, setFilteredMovies] = useState([]);
   const [searchText, setSearchText] = useState('');
-  const [sortBy, setSortBy] = useState('none');
+  const [sortBy, setSortBy] = useState('');
   const API_URL = 'http://your-api-domain.com/api/movies';
 
   useEffect(() => {
@@ -69,14 +69,16 @@ function Home (props) {
             onChange={handleSearch}
             className="search-input"
           />
+          <span className="sort-label">Sort By:</span>
           <select value={sortBy} onChange={handleSortChange} className="sort-select">
-            <option value="none">Sort By</option>
+            {/* Initial "None" option with empty value for hiding */}
+            <option value="">None</option>
             <option value="title">Title</option>
             <option value="date">Release Date</option>
           </select>
         </div>
         <button onClick={handleGoToLibrary} className="library-button">
-          Go to your library
+          Your Library
         </button>
       </div>
       <div className="movie-list">
