@@ -1,0 +1,32 @@
+.movie-card {
+  width: 30%; /* Set a fixed width for better consistency */
+  margin: 1%;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  display: inline-block;
+  vertical-align: top;
+  text-align: center; /* Center align the content */
+}
+
+.movie-card h2 {
+  margin-top: 0;
+  white-space: nowrap; /* Prevent title from wrapping */
+  overflow: hidden; /* Hide overflowing text */
+  text-overflow: ellipsis; /* Show ellipsis for overflowed text */
+}
+
+.movie-card button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.movie-card button:hover {
+  background-color: #0056b3;
+}

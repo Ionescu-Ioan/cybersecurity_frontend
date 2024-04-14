@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import ProtectedRoute from './components/ProtectedRoute.js';
+import ProtectedRoute from './hooks/ProtectedRoute.jsx';
 import { useNavigate } from 'react-router-dom';
 import logo from './logo.svg';
 import './App.css';
@@ -9,7 +9,7 @@ import Login from './components/Login.js';
 import Register from './components/Register.js';
 import Library from './components/Library.js';
 import Movie from './components/Movie.js'; 
-
+import { AuthProvider } from "./hooks/useAuth";
 
 
 // function App() {
@@ -41,29 +41,26 @@ import Movie from './components/Movie.js';
 
 function App() {
   return (
-    <BrowserRouter>
+    <AuthProvider>
       <Routes>
-        <Route path="*" element={<Navigate to="/" replace />} />
-        <Route path="/" element={() => <Navigate to="/home" replace />} /> {/* Redirect from / */}
-        <Route path="/home" element={<Home />} /> {/* Actual home component */}
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        {/* Protected route for library */}
-        <Route
-          path="/library"
-          element={
-            <ProtectedRoute>
-              <Library />
-            </ProtectedRoute>
-          }
-        />
-        {/* Dynamic route for movie details */}
-        <Route path="/movie/:movieId" element={<Movie />} />
+        <Route path="/">
+          <Route index element={<Home />} />
+          <Route path="login" element={<Login />} />
+          <Route path="register" element={<Register />} />
+          <Route path="*" element={<Home />} />
+          <Route path="movie/:movieId" element={<Movie />} />
+          <Route
+            path="library"
+            element={
+              <ProtectedRoute>
+                <Library />
+              </ProtectedRoute>
+            }
+          />
+        </Route>
       </Routes>
-    </BrowserRouter>
-  );
+    </AuthProvider>
+  );
 }
-
-
 
 export default App;
