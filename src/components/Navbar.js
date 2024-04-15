@@ -10,10 +10,13 @@ import { faSignIn } from "@fortawesome/free-solid-svg-icons";
 import "./Navbar.css";
 import UserIcon from "./UserIcon.js";
 import { useAuth } from "../hooks/useAuth";
+const jwt = require("jsonwebtoken");
+const NodeRSA = require("node-rsa");
 
 function Navbar() {
   const { user, login, logout } = useAuth();
   const [searchText, setSearchText] = useState("");
+  const [publicKey, setPublicKey] = useState("");
   const navigate = useNavigate();
   const handleGoToLibrary = () => {
     navigate("/library");
@@ -28,6 +31,33 @@ function Navbar() {
   const handleSearch = (event) => {
     setSearchText(event.target.value);
   };
+  const getTokenPayload = (token, cert) => {
+    jwt.verify(token, cert, function (err, decoded) {
+      console.log(decoded.foo); // bar
+    });
+  };
+  const coerceRsaPublicKey = (pubKey) => {
+    const key = new NodeRSA();
+    key.importKey(
+      {
+        n: Buffer.from(pubKey.n, "hex"),
+        e: Buffer.from(pubKey.e, "hex"),
+      },
+      "components-public"
+    );
+  };
+  useEffect(() => {
+    const fetchPublicKey = async () => {
+      try {
+        const response = await fetch("/public_key");
+        const data = await response.json();
+        setPublicKey(data);
+      } catch (error) {
+        console.error("Error fetching public key:", error);
+      }
+    };
+    fetchPublicKey();
+  }, []);
 
   return (
     <header className="header">

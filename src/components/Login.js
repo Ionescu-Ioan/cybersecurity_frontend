@@ -51,8 +51,8 @@ function Login(props) {
       setFailedLogin(true);
       console.log("error");
     } else {
-      const loginData = await loginResult.json();
-      await login({ loginData });
+      const data = await loginResult.json();
+      await login({ data });
     }
   };
 
