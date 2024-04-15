@@ -10,8 +10,6 @@ import { faSignIn } from "@fortawesome/free-solid-svg-icons";
 import "./Navbar.css";
 import UserIcon from "./UserIcon.js";
 import { useAuth } from "../hooks/useAuth";
-const jwt = require("jsonwebtoken");
-const NodeRSA = require("node-rsa");
 
 function Navbar() {
   const { user, login, logout } = useAuth();
@@ -31,21 +29,8 @@ function Navbar() {
   const handleSearch = (event) => {
     setSearchText(event.target.value);
   };
-  const getTokenPayload = (token, cert) => {
-    jwt.verify(token, cert, function (err, decoded) {
-      console.log(decoded.foo); // bar
-    });
-  };
-  const coerceRsaPublicKey = (pubKey) => {
-    const key = new NodeRSA();
-    key.importKey(
-      {
-        n: Buffer.from(pubKey.n, "hex"),
-        e: Buffer.from(pubKey.e, "hex"),
-      },
-      "components-public"
-    );
-  };
+  const getTokenPayload = (token, cert) => {};
+  const coerceRsaPublicKey = (pubKey) => {};
   useEffect(() => {
     const fetchPublicKey = async () => {
       try {
@@ -117,11 +102,8 @@ function Navbar() {
 
             {user ? (
               <li className="nav__item">
-                <NavLink
-                  className="user_icon"
-                  title={`Hello, ${user.username}!`}
-                >
-                  <UserIcon userName={user.userName} />
+                <NavLink className="user_icon" title={`Hello, ${user.data}!`}>
+                  <UserIcon userName={user.data} />
                 </NavLink>
               </li>
             ) : (
