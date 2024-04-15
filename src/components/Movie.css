@@ -1,14 +1,24 @@
 .movie-card {
-  width: 30%; /* Set a fixed width for better consistency */
+  width: 30%;
   margin: 1%;
   padding: 20px;
   border: 1px solid #ddd;
-  border-radius: 5px;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-  background-color: #fff;
   display: inline-block;
   vertical-align: top;
-  text-align: center; /* Center align the content */
+  text-align: center;
+
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(8.5px);
+  -webkit-backdrop-filter: blur(8.5px);
+  border-radius: 10px;
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 0.4rem;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .movie-card h2 {
@@ -18,15 +28,60 @@
   text-overflow: ellipsis; /* Show ellipsis for overflowed text */
 }
 
-.movie-card button {
-  background-color: #007bff;
-  color: #fff;
-  border: none;
+.movie-card button,
+.movie-card button:after {
+  border-radius: 30px 30px;
+  margin: 0.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
   padding: 8px 16px;
-  border-radius: 5px;
-  cursor: pointer;
+  font-size: 1.2rem;
+  font-family: "Raleway", sans-serif;
+  background: linear-gradient(45deg, transparent 5%, #d9c0e0 5%);
+  border: 0;
+  color: #fff;
+  letter-spacing: 3px;
+  box-shadow: 3px 3px 3px 3px #ce94de;
+  outline: transparent;
+  position: relative;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  align-self: center;
+}
+
+.movie-card button:after {
+  --slice-0: inset(50% 50% 50% 50%);
+  --slice-1: inset(80% -6px 0 0);
+  --slice-2: inset(50% -6px 30% 0);
+  --slice-3: inset(10% -6px 85% 0);
+  --slice-4: inset(40% -6px 43% 0);
+  --slice-5: inset(80% -6px 5% 0);
+
+  content: "ALTERNATE TEXT";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    45deg,
+    transparent 3%,
+    #00e6f6 3%,
+    #00e6f6 5%,
+    #d9c0e0 5%
+  );
+  text-shadow: -3px -3px 0px #f8f005, 3px 3px 0px #00e6f6;
+  clip-path: var(--slice-0);
 }
 
 .movie-card button:hover {
-  background-color: #0056b3;
+  cursor: pointer;
+}
+.movie-card button:hover:after {
+  animation: 1s glitch;
+  animation-timing-function: steps(2, end);
 }

@@ -1,7 +1,13 @@
 import { createContext, useContext, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { useLocalStorage } from "./useLocalStorage";
-const AuthContext = createContext();
+
+const AuthContext = createContext({
+  isLoggedIn: false,
+  token: null,
+  setIsLoggedIn: () => {},
+  setToken: () => {},
+});
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useLocalStorage("user", null);

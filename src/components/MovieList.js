@@ -23,7 +23,12 @@ function MovieList() {
   return (
     <div className="movie-list">
       {movies.map((movie, index) => (
-        <Movie key={index} title={movie.title} price={movie.price} />
+        <Movie
+          key={index}
+          title={movie.title}
+          poster={movie.poster}
+          price={movie.price}
+        />
       ))}
     </div>
   );

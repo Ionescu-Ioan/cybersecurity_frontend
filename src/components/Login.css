@@ -8,7 +8,7 @@
   box-sizing: border-box;
 }
 
-body {
+/* body {
   background-image: url("../../public/background.jpg");
   background-size: cover;
   display: flex;
@@ -17,7 +17,7 @@ body {
   height: 100vh;
   width: 100vw;
   font-family: "Raleway", sans-serif;
-}
+} */
 
 .mainContainer {
   display: flex;
@@ -250,7 +250,6 @@ body {
 }
 
 .RegisterLink {
-  text-decoration: none;
   color: #3b2576;
   font-style: italic;
 }
