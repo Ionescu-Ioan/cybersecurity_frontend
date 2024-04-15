@@ -8,17 +8,6 @@
   box-sizing: border-box;
 }
 
-/* body {
-  background-image: url("../../public/background.jpg");
-  background-size: cover;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  width: 100vw;
-  font-family: "Raleway", sans-serif;
-} */
-
 .mainContainer {
   display: flex;
   align-items: center;

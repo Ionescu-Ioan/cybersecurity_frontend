@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 //import "./Home.css";
-import { useNavigate } from "react-router-dom";
 import MovieList from "./MovieList";
 import Navbar from "./Navbar";
 
@@ -11,6 +10,18 @@ function Home(props) {
   const [sortBy, setSortBy] = useState("");
   const API_URL = "http://your-api-domain.com/api/movies";
   //const navigate = useNavigate();
+  useEffect(() => {
+    const fetchMovies = async () => {
+      try {
+        const response = await fetch("movie/all");
+        const data = await response.json();
+        setAllMovies(data);
+      } catch (error) {
+        console.error("Error fetching movies:", error);
+      }
+    };
+    fetchMovies();
+  }, []);
 
   const sortMovies = (movies, sortBy) => {
     if (sortBy === "title") {
@@ -22,10 +33,6 @@ function Home(props) {
     }
   };
 
-  // const handleSearch = (event) => {
-  //   setSearchText(event.target.value);
-  // };
-
   const handleSortChange = (event) => {
     setSortBy(event.target.value);
   };
@@ -35,41 +42,15 @@ function Home(props) {
     // Add movie to user's library
   };
 
-  // Handle library navigation logic (implementation omitted for brevity)
-  // const handleGoToLibrary = () => {
-  //   navigate("/library");
-  // };
-
   const handleOpenMovie = (movie) => {
     // navigate to movie details page with movie id
   };
-
-  // return (
-  //   <div className="home-container">
-  //     <div className="top-bar">
-  //       <h1>Movie Library</h1>
-  //       <input
-  //         type="text"
-  //         placeholder="Search Movies"
-  //         value={searchText}
-  //         onChange={handleSearch}
-  //         className="search-input"
-  //       />
-  //       <button onClick={handleGoToLibrary} className="library-button">
-  //         Your Library
-  //       </button>
-  //     </div>
-  //     <div className="movie-list">
-  //       <MovieList allMovies />
-  //     </div>
-  //   </div>
-  // );
 
   return (
     <div className="home-container">
       <Navbar />
       <div className="movie-list">
-        <MovieList allMovies />
+        <MovieList movies={allMovies} />
       </div>
     </div>
   );

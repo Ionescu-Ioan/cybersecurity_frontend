@@ -6,7 +6,7 @@ function UserIcon({ userName }) {
 
   // Style for the icon container
   const iconStyle = {
-    backgroundColor: "#ccc", // Customize background color
+    backgroundColor: "#5f5b5b", // Customize background color
     color: "#fff", // Customize text color
     borderRadius: "50%", // Make it a circle
     width: "40px",

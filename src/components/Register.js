@@ -37,6 +37,26 @@ function Register(props) {
     }
   };
 
+  const onEnter = (event) => {
+    if (event.key === "Enter") {
+      // Check which field has focus and move to the next one
+      const focusedField = document.activeElement;
+      if (first_name && last_name && email && password && confirmed_password) {
+        onButtonClick();
+      } else {
+        if (focusedField === document.getElementById("firstNameInput")) {
+          document.getElementById("lastNameInput").focus();
+        } else if (focusedField === document.getElementById("lastNameInput")) {
+          document.getElementById("emailInput").focus();
+        } else if (focusedField === document.getElementById("emailInput")) {
+          document.getElementById("passwordInput").focus();
+        } else if (focusedField === document.getElementById("passwordInput")) {
+          document.getElementById("confirmedPasswordInput").focus();
+        }
+      }
+    }
+  };
+
   const onButtonClick = () => {
     const data = new FormData();
 
@@ -47,10 +67,6 @@ function Register(props) {
     data.append("last_name", last_name);
 
     console.log(data.getAll("email"));
-
-    // for (const key of data.keys()) {
-    //   console.log(key);
-    // }
 
     setClicked(true);
     fetch("/user/register", {
@@ -108,6 +124,8 @@ function Register(props) {
 
         <div className={"inputContainer"}>
           <input
+            id="firstNameInput"
+            onKeyDown={onEnter}
             value={first_name}
             placeholder="First Name"
             onChange={(ev) => setFirstName(ev.target.value)}
@@ -120,6 +138,8 @@ function Register(props) {
 
         <div className={"inputContainer"}>
           <input
+            id="lastNameInput"
+            onKeyDown={onEnter}
             value={last_name}
             placeholder="Last Name"
             onChange={(ev) => setLastName(ev.target.value)}
@@ -132,6 +152,8 @@ function Register(props) {
 
         <div className={"inputContainer"}>
           <input
+            id="emailInput"
+            onKeyDown={onEnter}
             value={email}
             placeholder="Email"
             onChange={(ev) => setEmail(ev.target.value)}
@@ -144,6 +166,8 @@ function Register(props) {
 
         <div className={"inputContainer"}>
           <input
+            id="passwordInput"
+            onKeyDown={onEnter}
             value={password}
             placeholder="Password"
             onChange={(ev) => setPassword(ev.target.value)}
@@ -157,6 +181,8 @@ function Register(props) {
 
         <div className={"inputContainer"}>
           <input
+            id="confirmedPasswordInput"
+            onKeyDown={onEnter}
             value={confirmed_password}
             placeholder="Confirm Password"
             onChange={(ev) => setConfirmedPassword(ev.target.value)}

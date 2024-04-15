@@ -1,28 +1,11 @@
 import { useAuth } from "../hooks/useAuth";
 import { useEffect, useState } from "react";
+import MovieList from "./MovieList";
+import Navbar from "./Navbar";
 
 function Library(props) {
   const { user } = useAuth();
-  const [movies, setMovies] = useState([]);
-  const getMovieCollection = async () => {
-    const moviesRequest = await fetch("/movie/collection", {
-      headers: {
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-        Authorization: `Bearer ${user.loginData.token}`,
-      },
-      method: "GET",
-      mode: "cors",
-    });
-
-    if (!moviesRequest.ok) {
-      throw new Error("Invalid token!");
-      console.log("error");
-    }
-
-    const moviesData = await moviesRequest.json();
-    setMovies(moviesData);
-  };
+  const [movieCollection, setMovieCollection] = useState([]);
 
   useEffect(() => {
     const getMovieCollection = async () => {
@@ -30,7 +13,7 @@ function Library(props) {
         headers: {
           "Content-Type": "application/json",
           "Access-Control-Allow-Origin": "*",
-          Authorization: `Bearer ${user.loginData.token}`,
+          Authorization: `Bearer ${user.data.token}`,
         },
         method: "GET",
         mode: "cors",
@@ -41,16 +24,18 @@ function Library(props) {
       }
 
       const moviesData = await moviesRequest.json();
-      setMovies(moviesData);
+      setMovieCollection(moviesData);
     };
 
     getMovieCollection();
   }, []);
 
   return (
-    <div>
-      <div>{user.loginData.user}</div>
-      <div>{movies}</div>
+    <div className="home-container">
+      <Navbar />
+      <div className="movie-list">
+        <MovieList movies={movieCollection} />
+      </div>
     </div>
   );
 }

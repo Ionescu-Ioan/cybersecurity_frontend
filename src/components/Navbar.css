@@ -99,6 +99,7 @@
 }
 
 .user_icon {
+  text-decoration: none;
   position: relative;
   display: block;
   width: 40px;

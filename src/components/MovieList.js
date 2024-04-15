@@ -2,24 +2,9 @@
 import React from "react";
 import Movie from "./Movie";
 import "./MovieList.css";
-import { useState, useEffect } from "react";
+//import { useState, useEffect } from "react";
 
-function MovieList() {
-  const [movies, setMovies] = useState([]);
-
-  useEffect(() => {
-    const fetchMovies = async () => {
-      try {
-        const response = await fetch("movie/all");
-        const data = await response.json();
-        setMovies(data);
-      } catch (error) {
-        console.error("Error fetching movies:", error);
-      }
-    };
-    fetchMovies();
-  }, []);
-
+function MovieList({ movies }) {
   return (
     <div className="movie-list">
       {movies.map((movie, index) => (

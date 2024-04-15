@@ -5,7 +5,6 @@ import { useLocalStorage } from "./useLocalStorage";
 const AuthContext = createContext({
   isLoggedIn: false,
   token: null,
-  setIsLoggedIn: () => {},
   setToken: () => {},
 });
 

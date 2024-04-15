@@ -32,6 +32,20 @@ function Login(props) {
     }
   };
 
+  const onEnter = (event) => {
+    if (event.key === "Enter") {
+      // Check which field has focus and move to the next one
+      const focusedField = document.activeElement;
+      if (email && password) {
+        onButtonClick();
+      } else {
+        if (focusedField === document.getElementById("emailInput")) {
+          document.getElementById("passwordInput").focus();
+        }
+      }
+    }
+  };
+
   const onButtonClick = async () => {
     setClicked(true);
     const loginResult = await fetch("/login", {
@@ -83,6 +97,8 @@ function Login(props) {
         <br />
         <div className={"inputContainer"}>
           <input
+            id="emailInput" // Added ID for focus targeting
+            onKeyDown={onEnter}
             value={email}
             placeholder="Email"
             onChange={(ev) => setEmail(ev.target.value)}
@@ -93,6 +109,8 @@ function Login(props) {
         <br />
         <div className={"inputContainer"}>
           <input
+            id="passwordInput" // Added ID for focus targeting
+            onKeyDown={onEnter}
             value={password}
             placeholder="Password"
             onChange={(ev) => setPassword(ev.target.value)}

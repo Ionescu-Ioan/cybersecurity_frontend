@@ -10,6 +10,7 @@ import { faSignIn } from "@fortawesome/free-solid-svg-icons";
 import "./Navbar.css";
 import UserIcon from "./UserIcon.js";
 import { useAuth } from "../hooks/useAuth";
+import * as jose from "jose";
 
 function Navbar() {
   const { user, login, logout } = useAuth();
@@ -25,7 +26,7 @@ function Navbar() {
   const handleOnLoginClick = () => {
     navigate("/login");
   };
-  const handleOnLogoutClick = () => {};
+
   const handleSearch = (event) => {
     setSearchText(event.target.value);
   };
@@ -102,8 +103,10 @@ function Navbar() {
 
             {user ? (
               <li className="nav__item">
+                {/* <NavLink className="user_icon" title={`Hello, ${user.data.username}!`}> */}
                 <NavLink className="user_icon" title={`Hello, ${user.data}!`}>
-                  <UserIcon userName={user.data} />
+                  {/* <UserIcon userName={user.data.username} /> */}
+                  <UserIcon userName="Ioan" />
                 </NavLink>
               </li>
             ) : (
