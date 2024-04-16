@@ -11,9 +11,7 @@ function Library(props) {
     const getMovieCollection = async () => {
       const moviesRequest = await fetch("/movie/collection", {
         headers: {
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Origin": "*",
-          Authorization: `Bearer ${user.data.token}`,
+          Authorization: `Bearer ${user.data.token}`
         },
         method: "GET",
         mode: "cors",
@@ -24,6 +22,7 @@ function Library(props) {
       }
 
       const moviesData = await moviesRequest.json();
+      console.log(moviesRequest);
       setMovieCollection(moviesData);
     };
 
