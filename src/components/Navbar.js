@@ -12,6 +12,19 @@ import UserIcon from "./UserIcon.js";
 import { useAuth } from "../hooks/useAuth";
 import * as jose from "jose";
 
+const getPayload = (token) => {
+  if (!token) {
+    return null; 
+  }
+  try {
+    const payload = jose.decodeJwt(token);
+    return payload;
+  } catch (error) {
+    console.error("Error decoding JWT:", error);
+    return null; 
+  }
+};
+
 function Navbar() {
   const { user, login, logout } = useAuth();
   const [payload, setPayload] = useState(null);
@@ -31,22 +44,7 @@ function Navbar() {
   const handleSearch = (event) => {
     setSearchText(event.target.value);
   };
-  // Helper function to extract payload from token (if available)
-  const getPayload = async (token) => {
-    if (!token || !publicKey) {
-      return null; // Handle missing token or key gracefully
-    }
-
-    try {
-      const payload = jose.decodeJwt(token);
-      console.log(payload.first_name);
-      return payload;
-    } catch (error) {
-      console.error("Error decoding JWT:", error);
-      return null; // Handle decoding errors gracefully
-    }
-  };
-  const coerceRsaPublicKey = (pubKey) => {};
+  
   useEffect(() => {
     const fetchPublicKey = async () => {
       try {
@@ -58,9 +56,16 @@ function Navbar() {
       }
     };
     fetchPublicKey();
-    const decodedPayload = getPayload(user.data.token);
-    setPayload(decodedPayload);
-    console.log(user);
+
+    const populateTokenPayload = () => {
+      if (user)
+      {
+        const decodedPayload = getPayload(user.data.token);
+        setPayload(decodedPayload);
+      }
+    };
+    populateTokenPayload();
+
   }, []);
 
   return (
@@ -119,13 +124,13 @@ function Navbar() {
               </li>
             )}
 
-            {user ? (
+            {(user && payload) ? (
               <li className="nav__item">
                 <NavLink
                   className="user_icon"
-                  title={`Hello, ${user.data.username}!`}
+                  title={`Hello, ${payload.first_name}!`}
                 >
-                  {user.data &&
+                  {
                     payload && ( // Check for both user data and payload
                       <>
                         <UserIcon userName={payload.first_name} />
