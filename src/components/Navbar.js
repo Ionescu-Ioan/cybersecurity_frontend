@@ -14,6 +14,7 @@ import * as jose from "jose";
 
 function Navbar() {
   const { user, login, logout } = useAuth();
+  const [payload, setPayload] = useState(null);
   const [searchText, setSearchText] = useState("");
   const [publicKey, setPublicKey] = useState("");
   const navigate = useNavigate();
@@ -30,7 +31,21 @@ function Navbar() {
   const handleSearch = (event) => {
     setSearchText(event.target.value);
   };
-  const getTokenPayload = (token, cert) => {};
+  // Helper function to extract payload from token (if available)
+  const getPayload = async (token) => {
+    if (!token || !publicKey) {
+      return null; // Handle missing token or key gracefully
+    }
+
+    try {
+      const payload = jose.decodeJwt(token);
+      console.log(payload.first_name);
+      return payload;
+    } catch (error) {
+      console.error("Error decoding JWT:", error);
+      return null; // Handle decoding errors gracefully
+    }
+  };
   const coerceRsaPublicKey = (pubKey) => {};
   useEffect(() => {
     const fetchPublicKey = async () => {
@@ -43,6 +58,9 @@ function Navbar() {
       }
     };
     fetchPublicKey();
+    const decodedPayload = getPayload(user.data.token);
+    setPayload(decodedPayload);
+    console.log(user);
   }, []);
 
   return (
@@ -103,10 +121,16 @@ function Navbar() {
 
             {user ? (
               <li className="nav__item">
-                {/* <NavLink className="user_icon" title={`Hello, ${user.data.username}!`}> */}
-                <NavLink className="user_icon" title={`Hello, ${user.data}!`}>
-                  {/* <UserIcon userName={user.data.username} /> */}
-                  <UserIcon userName="Ioan" />
+                <NavLink
+                  className="user_icon"
+                  title={`Hello, ${user.data.username}!`}
+                >
+                  {user.data &&
+                    payload && ( // Check for both user data and payload
+                      <>
+                        <UserIcon userName={payload.first_name} />
+                      </>
+                    )}
                 </NavLink>
               </li>
             ) : (
