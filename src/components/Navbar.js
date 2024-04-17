@@ -93,7 +93,7 @@ function Navbar() {
             <li className="nav__item">
               <input
                 type="text"
-                placeholder="Search Movies"
+                placeholder="Search movie by title"
                 value={searchText}
                 onChange={handleSearch}
                 className="search-input"
