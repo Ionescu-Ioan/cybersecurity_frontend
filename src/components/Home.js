@@ -47,7 +47,7 @@ function Home(props) {
 
   return (
     <div className="home-container">
-      <Navbar />
+      <Navbar customMessage="Movie Library" />
       <MovieList movies={allMovies} />
     </div>
   );

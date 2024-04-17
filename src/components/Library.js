@@ -31,7 +31,7 @@ function Library(props) {
 
   return (
     <div className="home-container">
-      <Navbar />
+      <Navbar customMessage="Your Library" />
       <MovieList movies={movieCollection} />
     </div>
   );

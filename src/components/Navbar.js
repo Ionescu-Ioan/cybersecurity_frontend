@@ -25,9 +25,7 @@ const getPayload = (token) => {
   }
 };
 
-
-
-function Navbar() {
+function Navbar({ customMessage }) {
   const { user, login, logout } = useAuth();
   const [payload, setPayload] = useState(null);
   const [searchText, setSearchText] = useState("");
@@ -35,20 +33,10 @@ function Navbar() {
   const [showMenu, setShowMenu] = useState(false);
   const navigate = useNavigate();
 
-
   const handleGoToLibrary = () => {
     closeMenuOnMobile();
     navigate("/library");
   };
-
-  const handleUserIconClick = () => {
-    if (user) 
-        {
-          console.log('test');
-          navigate("/profile");
-
-        }
-  }
 
   const handleOnHomeClick = () => {
     closeMenuOnMobile();
@@ -70,6 +58,10 @@ function Navbar() {
       setShowMenu(false);
     }
   };
+  const handleUserIconClick = () => {
+    closeMenuOnMobile();
+    navigate("/profile");
+  };
 
   useEffect(() => {
     const fetchPublicKey = async () => {
@@ -90,13 +82,14 @@ function Navbar() {
       }
     };
     populateTokenPayload();
+    console.log(customMessage);
   }, []);
 
   return (
     <header className="header">
       <nav className="nav container">
         <NavLink to="/" className="nav__logo" title="Home Page">
-          Movie Library
+          {customMessage}
         </NavLink>
 
         <div
@@ -115,7 +108,11 @@ function Navbar() {
             </li>
             {user ? (
               <li className="nav__item">
-                <button onClick={handleGoToLibrary} className="library-button">
+                <button
+                  onClick={handleGoToLibrary}
+                  className="library-button"
+                  title="Go to Your Library"
+                >
                   Your Library
                 </button>
               </li>
@@ -153,12 +150,16 @@ function Navbar() {
 
             {user && payload ? (
               <li className="nav__item">
-
-              <button title={`Hello, ${payload.first_name}!`} className="user_icon" onClick={handleUserIconClick}>
-                  <UserIcon userName={payload.first_name} /> 
-              </button>
-
-              
+                <span
+                  className="user_icon"
+                  // title={`Hello, ${payload.first_name}!`}
+                  title="Go to your profile"
+                  onClick={handleUserIconClick}
+                >
+                  <>
+                    <UserIcon userName={payload.first_name} />
+                  </>
+                </span>
               </li>
             ) : (
               <li className="nav__item">
