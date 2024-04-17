@@ -9,14 +9,7 @@ function UserIcon({ userName }) {
   const firstLetter = userName ? userName.charAt(0).toUpperCase() : "";
   const navigate = useNavigate();
 
-  const handleUserIconClick = () => {
-    if (user) 
-        {
-          console.log('test');
-          navigate("/profile");
 
-        }
-  }
 
   // Style for the icon container
   const iconStyle = {

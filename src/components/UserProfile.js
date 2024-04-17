@@ -14,10 +14,15 @@ function UserProfile() {
 
   const getUserData = async() => 
 {
-    const res = await fetch ('/user/my');
+    const res = await fetch ('/user/my',{
+      headers: {
+        Authorization: `Bearer ${user.data.token}`,
+      },
+      method: "GET",
+      mode: "cors",
+    });
     const resUserData = await res.json();
     setuserData(resUserData);
-    console.log(resUserData);
 
 }
 
@@ -29,7 +34,7 @@ function UserProfile() {
   return (
     <div className="profile-container">
       <Navbar />
-      <div>{}</div>
+      <div></div>
     </div>
   );
 }

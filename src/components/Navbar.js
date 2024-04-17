@@ -41,6 +41,14 @@ function Navbar() {
     navigate("/library");
   };
 
+  const handleUserIconClick = () => {
+    if (user) 
+        {
+          console.log('test');
+          navigate("/profile");
+
+        }
+  }
 
   const handleOnHomeClick = () => {
     closeMenuOnMobile();
@@ -146,7 +154,9 @@ function Navbar() {
             {user && payload ? (
               <li className="nav__item">
 
-              <div title={`Hello, ${payload.first_name}!`}   className="user_icon"> <UserIcon userName={payload.first_name} /> </div>
+              <button title={`Hello, ${payload.first_name}!`} className="user_icon" onClick={handleUserIconClick}>
+                  <UserIcon userName={payload.first_name} /> 
+              </button>
 
               
               </li>
