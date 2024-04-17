@@ -95,6 +95,7 @@
 }
 
 .user_icon {
+  background-color: #5f5b5b;
   text-decoration: none;
   position: relative;
   display: block;
@@ -102,7 +103,7 @@
   height: 40px;
   text-align: center;
   line-height: 43px;
-
+  cursor: pointer;
   border-radius: 50%;
   color: hsl(0, 0%, 95%);
   transition: color 0.4s;
