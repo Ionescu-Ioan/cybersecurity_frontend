@@ -14,14 +14,14 @@ import * as jose from "jose";
 
 const getPayload = (token) => {
   if (!token) {
-    return null; 
+    return null;
   }
   try {
     const payload = jose.decodeJwt(token);
     return payload;
   } catch (error) {
     console.error("Error decoding JWT:", error);
-    return null; 
+    return null;
   }
 };
 
@@ -30,21 +30,33 @@ function Navbar() {
   const [payload, setPayload] = useState(null);
   const [searchText, setSearchText] = useState("");
   const [publicKey, setPublicKey] = useState("");
+  const [showMenu, setShowMenu] = useState(false);
   const navigate = useNavigate();
   const handleGoToLibrary = () => {
+    closeMenuOnMobile();
     navigate("/library");
   };
   const handleOnHomeClick = () => {
+    closeMenuOnMobile();
     navigate("/");
   };
   const handleOnLoginClick = () => {
+    closeMenuOnMobile();
     navigate("/login");
   };
 
   const handleSearch = (event) => {
     setSearchText(event.target.value);
   };
-  
+  const toggleMenu = () => {
+    setShowMenu(!showMenu);
+  };
+  const closeMenuOnMobile = () => {
+    if (window.innerWidth <= 1150) {
+      setShowMenu(false);
+    }
+  };
+
   useEffect(() => {
     const fetchPublicKey = async () => {
       try {
@@ -58,14 +70,12 @@ function Navbar() {
     fetchPublicKey();
 
     const populateTokenPayload = () => {
-      if (user)
-      {
+      if (user) {
         const decodedPayload = getPayload(user.data.token);
         setPayload(decodedPayload);
       }
     };
     populateTokenPayload();
-
   }, []);
 
   return (
@@ -75,7 +85,10 @@ function Navbar() {
           Movie Library
         </NavLink>
 
-        <div className={"nav__menu"} id="nav-menu">
+        <div
+          className={`nav__menu ${showMenu ? "show-menu" : ""}`}
+          id="nav-menu"
+        >
           <ul className="nav__list">
             <li className="nav__item">
               <input
@@ -124,18 +137,17 @@ function Navbar() {
               </li>
             )}
 
-            {(user && payload) ? (
+            {user && payload ? (
               <li className="nav__item">
                 <NavLink
                   className="user_icon"
                   title={`Hello, ${payload.first_name}!`}
                 >
-                  {
-                    payload && ( // Check for both user data and payload
-                      <>
-                        <UserIcon userName={payload.first_name} />
-                      </>
-                    )}
+                  {payload && ( // Check for both user data and payload
+                    <>
+                      <UserIcon userName={payload.first_name} />
+                    </>
+                  )}
                 </NavLink>
               </li>
             ) : (
@@ -147,12 +159,12 @@ function Navbar() {
             )}
           </ul>
 
-          <div className="nav__close" id="nav-close">
+          <div className="nav__close" id="nav-close" onClick={toggleMenu}>
             <IoClose />
           </div>
         </div>
 
-        <div className="nav__toggle" id="nav-toggle">
+        <div className="nav__toggle" id="nav-toggle" onClick={toggleMenu}>
           <IoMenu />
         </div>
       </nav>
