@@ -25,6 +25,8 @@ const getPayload = (token) => {
   }
 };
 
+
+
 function Navbar() {
   const { user, login, logout } = useAuth();
   const [payload, setPayload] = useState(null);
@@ -32,10 +34,14 @@ function Navbar() {
   const [publicKey, setPublicKey] = useState("");
   const [showMenu, setShowMenu] = useState(false);
   const navigate = useNavigate();
+
+
   const handleGoToLibrary = () => {
     closeMenuOnMobile();
     navigate("/library");
   };
+
+
   const handleOnHomeClick = () => {
     closeMenuOnMobile();
     navigate("/");
@@ -139,16 +145,10 @@ function Navbar() {
 
             {user && payload ? (
               <li className="nav__item">
-                <NavLink
-                  className="user_icon"
-                  title={`Hello, ${payload.first_name}!`}
-                >
-                  {payload && ( // Check for both user data and payload
-                    <>
-                      <UserIcon userName={payload.first_name} />
-                    </>
-                  )}
-                </NavLink>
+
+              <div title={`Hello, ${payload.first_name}!`}   className="user_icon"> <UserIcon userName={payload.first_name} /> </div>
+
+              
               </li>
             ) : (
               <li className="nav__item">

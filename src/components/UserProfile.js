@@ -3,36 +3,33 @@ import Navbar from "./Navbar";
 import { useAuth } from "../hooks/useAuth";
 import * as jose from "jose";
 
-const getPayload = (token) => {
-  if (!token) {
-    return null;
-  }
-  try {
-    const payload = jose.decodeJwt(token);
-    return payload;
-  } catch (error) {
-    console.error("Error decoding JWT:", error);
-    return null;
-  }
-};
+
+
+
 
 function UserProfile() {
-  const [payload, setPayload] = useState(null);
+  const [userData, setuserData] = useState(null);
   const { user } = useAuth();
+
+
+  const getUserData = async() => 
+{
+    const res = await fetch ('/user/my');
+    const resUserData = await res.json();
+    setuserData(resUserData);
+    console.log(resUserData);
+
+}
+
+
   useEffect(() => {
-    const populateTokenPayload = () => {
-      if (user) {
-        const decodedPayload = getPayload(user.data.token);
-        setPayload(decodedPayload);
-      }
-    };
-    populateTokenPayload();
+    getUserData()
   }, []);
 
   return (
     <div className="profile-container">
       <Navbar />
-      <div>payload.first_name</div>
+      <div>{}</div>
     </div>
   );
 }

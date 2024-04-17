@@ -8,6 +8,7 @@ import Register from "./components/Register.js";
 import Library from "./components/Library.js";
 import Movie from "./components/Movie.js";
 import { AuthProvider } from "./hooks/useAuth";
+import UserProfile from "./components/UserProfile.js";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="register" element={<Register />} />
           <Route path="*" element={<Home />} />
           <Route path="movie/:movieId" element={<Movie />} />
+          <Route path="profile" element={<ProtectedRoute> <UserProfile/> </ProtectedRoute>}/>
           <Route
             path="library"
             element={

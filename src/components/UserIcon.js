@@ -1,8 +1,22 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../hooks/useAuth";
 
 function UserIcon({ userName }) {
-  // Function to extract the first letter of the user's name
+  const { user, login, logout } = useAuth();
+
+
   const firstLetter = userName ? userName.charAt(0).toUpperCase() : "";
+  const navigate = useNavigate();
+
+  const handleUserIconClick = () => {
+    if (user) 
+        {
+          console.log('test');
+          navigate("/profile");
+
+        }
+  }
 
   // Style for the icon container
   const iconStyle = {
