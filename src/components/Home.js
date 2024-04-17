@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-//import "./Home.css";
 import MovieList from "./MovieList";
 import Navbar from "./Navbar";
 
@@ -49,9 +48,7 @@ function Home(props) {
   return (
     <div className="home-container">
       <Navbar />
-      <div className="movie-list">
-        <MovieList movies={allMovies} />
-      </div>
+      <MovieList movies={allMovies} />
     </div>
   );
 }

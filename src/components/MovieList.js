@@ -11,7 +11,8 @@ function MovieList({ movies }) {
         <Movie
           key={index}
           title={movie.title}
-          poster={movie.poster}
+          //poster={movie.poster}
+          poster="https://placehold.co/300x200"
           price={movie.price}
         />
       ))}

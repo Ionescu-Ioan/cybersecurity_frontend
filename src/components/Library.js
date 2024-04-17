@@ -11,7 +11,7 @@ function Library(props) {
     const getMovieCollection = async () => {
       const moviesRequest = await fetch("/movie/collection", {
         headers: {
-          Authorization: `Bearer ${user.data.token}`
+          Authorization: `Bearer ${user.data.token}`,
         },
         method: "GET",
         mode: "cors",
@@ -32,9 +32,7 @@ function Library(props) {
   return (
     <div className="home-container">
       <Navbar />
-      <div className="movie-list">
-        <MovieList movies={movieCollection} />
-      </div>
+      <MovieList movies={movieCollection} />
     </div>
   );
 }

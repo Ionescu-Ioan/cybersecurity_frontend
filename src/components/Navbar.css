@@ -83,10 +83,6 @@
   right: 1.5rem;
 }
 
-.show-menu {
-  right: 0;
-}
-
 .search-input {
   background-color: #fff;
   border: 1px solid #ccc;
@@ -224,4 +220,8 @@
 
 .library-button:hover:before {
   opacity: 0.8;
+}
+
+.show-menu {
+  right: 0;
 }
