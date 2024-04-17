@@ -8,17 +8,20 @@ function UserProfile() {
   const { user } = useAuth();
 
   const getUserData = async () => {
-    const res = await fetch("/user/my", {
+
+    const res = await fetch("/user/my2", {
       headers: {
         Authorization: `Bearer ${user.data.token}`,
       },
       method: "GET",
       mode: "cors",
     });
-    console.log("test");
-    // const resUserData = await res.json();
-    // setuserData(resUserData);
-    // console.log(resUserData);
+
+    const resUserData = await res.json();
+
+    console.log(resUserData);
+    setuserData(resUserData);
+    
   };
 
   useEffect(() => {
@@ -27,8 +30,7 @@ function UserProfile() {
 
   return (
     <div className="profile-container">
-      {/* <Navbar customMessage={`Hello, ${userData[0].first_name}!`} /> */}
-      <Navbar customMessage={`Hello, test!`} />
+       {userData ? <Navbar customMessage={`Hello, ${userData[0].first_name}!`} /> : <Navbar customMessage={''} />}
       <div>{}</div>
     </div>
   );
