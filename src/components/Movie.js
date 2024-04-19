@@ -35,7 +35,11 @@ const Movie = ({ title, poster, price, ownedMovie, movieId }) => {
   }, [isMovieOwned, ownedMovie]);
 
   return (
-    <div className={movieClassName} onClick={() => handleCardClick()}>
+    <div
+      className={movieClassName}
+      onClick={() => handleCardClick()}
+      title={title}
+    >
       <h2>{title}</h2>
       <img src={poster} alt="movie poster"></img>
       <p>Price: ${price}</p>

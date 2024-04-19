@@ -48,15 +48,15 @@ function Navbar({ customMessage, searchBarActive, loadSearchedMoviesHandler }) {
   };
 
   const handleKeyPress = (event) => {
-    if(event.key === 'Enter'){
-        handleSearchEnter();
+    if (event.key === "Enter") {
+      handleSearchEnter();
     }
-  }
+  };
 
   const handleSearchEnter = async () => {
-      const response = await fetch('/movie/like?title='+searchText);
-      const data = await response.json();
-      loadSearchedMoviesHandler(data);
+    const response = await fetch("/movie/like?title=" + searchText);
+    const data = await response.json();
+    loadSearchedMoviesHandler(data);
   };
 
   const handleSearch = (event) => {
@@ -100,9 +100,7 @@ function Navbar({ customMessage, searchBarActive, loadSearchedMoviesHandler }) {
   return (
     <header className="header">
       <nav className="nav container">
-        <NavLink className="nav__logo" title="Home Page">
-          {customMessage}
-        </NavLink>
+        <b className="nav__logo">{customMessage}</b>
 
         <div
           className={`nav__menu ${showMenu ? "show-menu" : ""}`}
