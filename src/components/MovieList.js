@@ -2,7 +2,7 @@ import React from "react";
 import Movie from "./Movie";
 import "./MovieList.css";
 
-function MovieList({ movies }) {
+function MovieList({ movies, ownedMovie }) {
   return (
     <div className="movie-list">
       {movies.map((movie, index) => (
@@ -12,6 +12,7 @@ function MovieList({ movies }) {
           //poster={movie.poster}
           poster="https://placehold.co/300x200"
           price={movie.price}
+          ownedMovie={ownedMovie}
         />
       ))}
     </div>

@@ -78,15 +78,19 @@ function Register(props) {
       .then((json) => {
         if (json.hasOwnProperty("err")) {
           setFailedToRegister(true);
+
           setSucceededToRegister(false);
           setRequestMessage(json["err"]);
+          setTimeout(() => {
+            setFailedToRegister(false);
+          }, 2000);
         } else {
           setFailedToRegister(false);
           setSucceededToRegister(true);
           setRequestMessage(json["msg"]);
           setTimeout(() => {
             navigate("/login");
-          }, "3000");
+          }, 2000);
         }
       });
   };
@@ -98,17 +102,13 @@ function Register(props) {
           message="Registered! - You will be redirect to Login page."
           customClassName="flash-message success"
         />
-      ) : (
-        <div></div>
-      )}
+      ) : null}
       {failedToRegister ? (
         <CustomFlashMessage
           message={requestMessage}
           customClassName="flash-message danger"
         />
-      ) : (
-        <div></div>
-      )}
+      ) : null}
       <div className={"mainContainer"}>
         <div className={"titleContainer"}>
           <div className={"RegisterText"}>
@@ -126,6 +126,7 @@ function Register(props) {
           <input
             id="firstNameInput"
             onKeyDown={onEnter}
+            onPaste={(e) => e.preventDefault()}
             value={first_name}
             placeholder="First Name"
             onChange={(ev) => setFirstName(ev.target.value)}
@@ -140,6 +141,7 @@ function Register(props) {
           <input
             id="lastNameInput"
             onKeyDown={onEnter}
+            onPaste={(e) => e.preventDefault()}
             value={last_name}
             placeholder="Last Name"
             onChange={(ev) => setLastName(ev.target.value)}
@@ -154,6 +156,7 @@ function Register(props) {
           <input
             id="emailInput"
             onKeyDown={onEnter}
+            onPaste={(e) => e.preventDefault()}
             value={email}
             placeholder="Email"
             onChange={(ev) => setEmail(ev.target.value)}
@@ -168,6 +171,7 @@ function Register(props) {
           <input
             id="passwordInput"
             onKeyDown={onEnter}
+            onPaste={(e) => e.preventDefault()}
             value={password}
             placeholder="Password"
             onChange={(ev) => setPassword(ev.target.value)}
@@ -183,6 +187,7 @@ function Register(props) {
           <input
             id="confirmedPasswordInput"
             onKeyDown={onEnter}
+            onPaste={(e) => e.preventDefault()}
             value={confirmed_password}
             placeholder="Confirm Password"
             onChange={(ev) => setConfirmedPassword(ev.target.value)}

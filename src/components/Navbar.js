@@ -25,7 +25,7 @@ const getPayload = (token) => {
   }
 };
 
-function Navbar({ customMessage }) {
+function Navbar({ customMessage, searchBarActive }) {
   const { user, login, logout } = useAuth();
   const [payload, setPayload] = useState(null);
   const [searchText, setSearchText] = useState("");
@@ -97,15 +97,20 @@ function Navbar({ customMessage }) {
           id="nav-menu"
         >
           <ul className="nav__list">
-            <li className="nav__item">
-              <input
-                type="text"
-                placeholder="Search movie by title"
-                value={searchText}
-                onChange={handleSearch}
-                className="search-input"
-              />
-            </li>
+            {searchBarActive ? (
+              <li className="nav__item">
+                <input
+                  type="text"
+                  placeholder="Search movie by title"
+                  value={searchText}
+                  onChange={handleSearch}
+                  className="search-input"
+                />
+              </li>
+            ) : (
+              <li className="nav__item"></li>
+            )}
+
             {user ? (
               <li className="nav__item">
                 <button

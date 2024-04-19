@@ -1,18 +1,21 @@
 /* MovieList.css */
 .movie-list {
+  display: flex;
   flex-direction: column;
   justify-items: center;
   align-items: center;
-  margin-top: 35px;
+  margin-top: 90rem;
   margin-bottom: 35px;
-  display: flex;
+
   justify-content: space-between;
 }
 
 @media screen and (min-width: 1150px) {
   .movie-list {
-    flex-direction: row;
-    margin-top: 25px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+
+    margin-top: 30rem;
     margin-bottom: 25px;
   }
 }

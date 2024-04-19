@@ -1,0 +1,29 @@
+.user-card {
+  width: 100%;
+  margin: 1%;
+  padding: 20px;
+
+  display: inline-block;
+  vertical-align: top;
+  text-align: center;
+  min-width: 300px;
+  align-items: center;
+
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(8.5px);
+  -webkit-backdrop-filter: blur(8.5px);
+  border-radius: 10px;
+  color: #ffffff;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.user-card h2 {
+  margin-top: 0;
+  white-space: nowrap; /* Prevent title from wrapping */
+  overflow: hidden; /* Hide overflowing text */
+  text-overflow: ellipsis; /* Show ellipsis for overflowed text */
+}

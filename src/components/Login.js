@@ -63,8 +63,13 @@ function Login(props) {
 
     if (!loginResult.ok) {
       setFailedLogin(true);
+      // Hide the success message after 2 seconds
+      setTimeout(() => {
+        setFailedLogin(false);
+      }, 2000);
       console.log("error");
     } else {
+      setFailedLogin(false); // Reset failedLogin status
       const data = await loginResult.json();
       await login({ data });
     }
@@ -81,9 +86,7 @@ function Login(props) {
           message="Login failed!"
           customClassName="flash-message danger"
         />
-      ) : (
-        <div></div>
-      )}
+      ) : null}
       <div className={"mainContainer"}>
         <div className={"titleContainer"}>
           <div className={"LoginText"}>
@@ -99,6 +102,7 @@ function Login(props) {
           <input
             id="emailInput" // Added ID for focus targeting
             onKeyDown={onEnter}
+            onPaste={(e) => e.preventDefault()}
             value={email}
             placeholder="Email"
             onChange={(ev) => setEmail(ev.target.value)}
@@ -111,6 +115,7 @@ function Login(props) {
           <input
             id="passwordInput" // Added ID for focus targeting
             onKeyDown={onEnter}
+            onPaste={(e) => e.preventDefault()}
             value={password}
             placeholder="Password"
             onChange={(ev) => setPassword(ev.target.value)}

@@ -7,7 +7,7 @@ function Home(props) {
   const [filteredMovies, setFilteredMovies] = useState([]);
   //const [searchText, setSearchText] = useState("");
   const [sortBy, setSortBy] = useState("");
-  const API_URL = "http://your-api-domain.com/api/movies";
+
   //const navigate = useNavigate();
   useEffect(() => {
     const fetchMovies = async () => {
@@ -47,8 +47,8 @@ function Home(props) {
 
   return (
     <div className="home-container">
-      <Navbar customMessage="Movie Library" />
-      <MovieList movies={allMovies} />
+      <Navbar customMessage="Movie Library" searchBarActive={true} />
+      <MovieList movies={allMovies} ownedMovie={false} />
     </div>
   );
 }
