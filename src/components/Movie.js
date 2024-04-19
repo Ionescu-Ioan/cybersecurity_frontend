@@ -1,9 +1,9 @@
 // Movie.js
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, createSearchParams } from "react-router-dom";
 import "./Movie.css";
 
-const Movie = ({ title, poster, price, ownedMovie }) => {
+const Movie = ({ title, poster, price, ownedMovie, movieId }) => {
   const [isMovieOwned, setIsMovieOwned] = useState(false);
   const [movieClassName, setMovieClassName] = useState("movie-card");
   const navigate = useNavigate();
@@ -14,7 +14,12 @@ const Movie = ({ title, poster, price, ownedMovie }) => {
   };
   const handleCardClick = () => {
     if (isMovieOwned) {
-      navigate("movie/movie_id");
+      navigate({
+        pathname: "movie",
+        search: createSearchParams({
+          movie_id: "" + movieId,
+        }).toString(),
+      });
     } else {
     }
   };

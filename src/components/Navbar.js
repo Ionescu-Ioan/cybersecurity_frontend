@@ -100,7 +100,7 @@ function Navbar({ customMessage, searchBarActive, loadSearchedMoviesHandler }) {
   return (
     <header className="header">
       <nav className="nav container">
-        <NavLink to="/" className="nav__logo" title="Home Page">
+        <NavLink className="nav__logo" title="Home Page">
           {customMessage}
         </NavLink>
 
