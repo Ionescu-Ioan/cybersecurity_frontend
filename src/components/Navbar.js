@@ -25,7 +25,7 @@ const getPayload = (token) => {
   }
 };
 
-function Navbar({ customMessage, searchBarActive }) {
+function Navbar({ customMessage, searchBarActive, loadSearchedMoviesHandler }) {
   const { user, login, logout } = useAuth();
   const [payload, setPayload] = useState(null);
   const [searchText, setSearchText] = useState("");
@@ -45,6 +45,18 @@ function Navbar({ customMessage, searchBarActive }) {
   const handleOnLoginClick = () => {
     closeMenuOnMobile();
     navigate("/login");
+  };
+
+  const handleKeyPress = (event) => {
+    if(event.key === 'Enter'){
+        handleSearchEnter();
+    }
+  }
+
+  const handleSearchEnter = async () => {
+      const response = await fetch('/movie/like?title='+searchText);
+      const data = await response.json();
+      loadSearchedMoviesHandler(data);
   };
 
   const handleSearch = (event) => {
@@ -105,6 +117,7 @@ function Navbar({ customMessage, searchBarActive }) {
                   value={searchText}
                   onChange={handleSearch}
                   className="search-input"
+                  onKeyPress={handleKeyPress}
                 />
               </li>
             ) : (

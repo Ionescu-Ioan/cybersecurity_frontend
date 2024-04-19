@@ -45,9 +45,13 @@ function Home(props) {
     // navigate to movie details page with movie id
   };
 
+  const loadSearchedMovies = (movieArray) => {
+      setAllMovies(movieArray);
+  };
+
   return (
     <div className="home-container">
-      <Navbar customMessage="Movie Library" searchBarActive={true} />
+      <Navbar customMessage="Movie Library" searchBarActive={true} loadSearchedMoviesHandler={loadSearchedMovies}/>
       <MovieList movies={allMovies} ownedMovie={false} />
     </div>
   );
