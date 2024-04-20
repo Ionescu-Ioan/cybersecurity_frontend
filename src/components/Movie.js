@@ -1,40 +1,43 @@
 // Movie.js
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, createSearchParams } from "react-router-dom";
 import "./Movie.css";
 
-const Movie = ({ title, poster, price, ownedMovie }) => {
+const Movie = ({ title, poster, price, ownedMovie, movieId }) => {
   const [isMovieOwned, setIsMovieOwned] = useState(false);
   const [movieClassName, setMovieClassName] = useState("movie-card");
   const navigate = useNavigate();
   const handleBuy = () => {
-    alert(`You bought ${title} for ${price} bucks!`);
+    if (!ownedMovie) {
+      alert(`You bought ${title} for ${price} bucks!`);
+    }
+
     // Handle buying logic here
     //console.log(`You bought ${title} for ${price}`);
   };
-  const handleCardClick = () => {
+  const handleGoToMovie = () => {
     if (isMovieOwned) {
-      navigate("movie/movie_id");
-    } else {
+      navigate({
+        pathname: `/movie/${movieId}`,
+        // search: createSearchParams({
+        //   movie_id: "" + movieId,
+        // }).toString(),
+      });
     }
   };
 
-  useEffect(() => {
-    const findMovieType = async () => {
-      setIsMovieOwned(ownedMovie);
-      if (isMovieOwned) {
-        setMovieClassName("movie-card owned");
-      }
-    };
-    findMovieType();
-  }, [isMovieOwned, ownedMovie]);
+  useEffect(() => {}, []);
 
   return (
-    <div className={movieClassName} onClick={() => handleCardClick()}>
+    <div className="movie-card" title={title}>
       <h2>{title}</h2>
       <img src={poster} alt="movie poster"></img>
       <p>Price: ${price}</p>
-      <button onClick={handleBuy}>Buy</button>
+      {ownedMovie ? (
+        <button onClick={handleGoToMovie}>Go to movie</button>
+      ) : (
+        <button onClick={handleBuy}>Buy</button>
+      )}
     </div>
   );
 };

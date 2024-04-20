@@ -22,6 +22,11 @@
   transition: color 0.4s;
   font-size: 1.25rem;
   font-family: "Dancing Script", cursive;
+  cursor: context-menu;
+}
+.nav__item_search {
+  display: flex;
+  flex-direction: row;
 }
 
 .nav__toggle,
@@ -94,6 +99,18 @@
   font-size: 16px;
 }
 
+.clear_button {
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  margin-left: 5px;
+  color: #ccc;
+}
+
+.clear_button_container {
+  display: flex;
+  align-items: center;
+}
 .user_icon {
   background-color: #5f5b5b;
   text-decoration: none;

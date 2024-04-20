@@ -13,8 +13,6 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  width: 100vw;
   font-family: "Raleway", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -30,22 +28,16 @@ code {
   padding: 10px;
   color: #fff;
   border-radius: 5px;
-}
-
-.flash-message {
-  padding: 10px;
-  color: #fff;
-  border-radius: 5px;
   display: flex;
   align-items: center;
   justify-content: center;
-  text-align: center; /* Center the text horizontally */
+  text-align: center;
 }
 
 .flash-message.danger {
-  background-color: #a50303; /* Normal red */
+  background-color: #a50303;
 }
 
 .flash-message.success {
-  background-color: #0a7a0a; /* Green color for success */
+  background-color: #0a7a0a;
 }

@@ -13,6 +13,7 @@ function MovieList({ movies, ownedMovie }) {
           poster="https://placehold.co/300x200"
           price={movie.price}
           ownedMovie={ownedMovie}
+          movieId={movie.id}
         />
       ))}
     </div>

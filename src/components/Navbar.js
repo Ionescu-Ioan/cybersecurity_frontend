@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { IoClose, IoMenu } from "react-icons/io5";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHome } from "@fortawesome/free-solid-svg-icons";
+import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { faSignOut } from "@fortawesome/free-solid-svg-icons";
 import { faSignIn } from "@fortawesome/free-solid-svg-icons";
@@ -25,7 +26,7 @@ const getPayload = (token) => {
   }
 };
 
-function Navbar({ customMessage, searchBarActive }) {
+function Navbar({ customMessage, searchBarActive, loadSearchedMoviesHandler }) {
   const { user, login, logout } = useAuth();
   const [payload, setPayload] = useState(null);
   const [searchText, setSearchText] = useState("");
@@ -38,6 +39,13 @@ function Navbar({ customMessage, searchBarActive }) {
     navigate("/library");
   };
 
+  const handleClearClick = async () => {
+    setSearchText("");
+    const response = await fetch("/movie/like?title=");
+    const data = await response.json();
+    loadSearchedMoviesHandler(data);
+  };
+
   const handleOnHomeClick = () => {
     closeMenuOnMobile();
     navigate("/");
@@ -45,6 +53,18 @@ function Navbar({ customMessage, searchBarActive }) {
   const handleOnLoginClick = () => {
     closeMenuOnMobile();
     navigate("/login");
+  };
+
+  const handleKeyPress = (event) => {
+    if (event.key === "Enter") {
+      handleSearchEnter();
+    }
+  };
+
+  const handleSearchEnter = async () => {
+    const response = await fetch("/movie/like?title=" + searchText);
+    const data = await response.json();
+    loadSearchedMoviesHandler(data);
   };
 
   const handleSearch = (event) => {
@@ -88,9 +108,7 @@ function Navbar({ customMessage, searchBarActive }) {
   return (
     <header className="header">
       <nav className="nav container">
-        <NavLink to="/" className="nav__logo" title="Home Page">
-          {customMessage}
-        </NavLink>
+        <b className="nav__logo">{customMessage}</b>
 
         <div
           className={`nav__menu ${showMenu ? "show-menu" : ""}`}
@@ -98,14 +116,24 @@ function Navbar({ customMessage, searchBarActive }) {
         >
           <ul className="nav__list">
             {searchBarActive ? (
-              <li className="nav__item">
+              <li className="nav__item nav__item_search">
                 <input
                   type="text"
                   placeholder="Search movie by title"
                   value={searchText}
                   onChange={handleSearch}
                   className="search-input"
+                  onKeyPress={handleKeyPress}
+                  title="Press enter to search"
                 />
+                <div className="clear_button_container">
+                  <FontAwesomeIcon
+                    icon={faCircleXmark}
+                    className="clear_button"
+                    title="Clear search"
+                    onClick={handleClearClick}
+                  />
+                </div>
               </li>
             ) : (
               <li className="nav__item"></li>

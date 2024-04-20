@@ -29,9 +29,16 @@ function Library(props) {
     getMovieCollection();
   }, []);
 
+  const loadSearchedMovies = (movieArray) => {
+    setMovieCollection(movieArray);
+  };
   return (
     <div className="home-container">
-      <Navbar customMessage="Your Library" searchBarActive={true} />
+      <Navbar
+        customMessage="Your Library"
+        searchBarActive={true}
+        loadSearchedMoviesHandler={loadSearchedMovies}
+      />
       <MovieList movies={movieCollection} ownedMovie={true} />
     </div>
   );
