@@ -87,3 +87,11 @@
   animation: 1s glitch;
   animation-timing-function: steps(2, end);
 }
+
+.user-card input:hover {
+  cursor: pointer;
+}
+
+::-webkit-file-upload-button {
+  display: none;
+}

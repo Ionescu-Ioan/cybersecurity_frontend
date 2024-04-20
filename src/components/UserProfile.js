@@ -65,7 +65,15 @@ function UserProfile() {
           <p>Last name: {userData[0].last_name}</p>
           <p>Email: {userData[0].email}</p>
           <br></br>
-          <input type="file" onChange={handleUploadProfilePic} />
+
+          <label for="myfile">Select profile picture:</label>
+          <input
+            type="file"
+            id="myfile"
+            onChange={handleUploadProfilePic}
+            title="Choose file"
+          />
+
           <br></br>
           <button onClick={handleConfirmUpload}>Upload picture</button>
         </div>

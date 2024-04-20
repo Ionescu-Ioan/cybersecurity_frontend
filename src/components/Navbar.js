@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { IoClose, IoMenu } from "react-icons/io5";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHome } from "@fortawesome/free-solid-svg-icons";
+import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { faSignOut } from "@fortawesome/free-solid-svg-icons";
 import { faSignIn } from "@fortawesome/free-solid-svg-icons";
@@ -36,6 +37,13 @@ function Navbar({ customMessage, searchBarActive, loadSearchedMoviesHandler }) {
   const handleGoToLibrary = () => {
     closeMenuOnMobile();
     navigate("/library");
+  };
+
+  const handleClearClick = async () => {
+    setSearchText("");
+    const response = await fetch("/movie/like?title=");
+    const data = await response.json();
+    loadSearchedMoviesHandler(data);
   };
 
   const handleOnHomeClick = () => {
@@ -108,7 +116,7 @@ function Navbar({ customMessage, searchBarActive, loadSearchedMoviesHandler }) {
         >
           <ul className="nav__list">
             {searchBarActive ? (
-              <li className="nav__item">
+              <li className="nav__item nav__item_search">
                 <input
                   type="text"
                   placeholder="Search movie by title"
@@ -116,7 +124,16 @@ function Navbar({ customMessage, searchBarActive, loadSearchedMoviesHandler }) {
                   onChange={handleSearch}
                   className="search-input"
                   onKeyPress={handleKeyPress}
+                  title="Press enter to search"
                 />
+                <div className="clear_button_container">
+                  <FontAwesomeIcon
+                    icon={faCircleXmark}
+                    className="clear_button"
+                    title="Clear search"
+                    onClick={handleClearClick}
+                  />
+                </div>
               </li>
             ) : (
               <li className="nav__item"></li>

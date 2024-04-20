@@ -8,42 +8,36 @@ const Movie = ({ title, poster, price, ownedMovie, movieId }) => {
   const [movieClassName, setMovieClassName] = useState("movie-card");
   const navigate = useNavigate();
   const handleBuy = () => {
-    alert(`You bought ${title} for ${price} bucks!`);
+    if (!ownedMovie) {
+      alert(`You bought ${title} for ${price} bucks!`);
+    }
+
     // Handle buying logic here
     //console.log(`You bought ${title} for ${price}`);
   };
-  const handleCardClick = () => {
+  const handleGoToMovie = () => {
     if (isMovieOwned) {
       navigate({
-        pathname: "movie",
-        search: createSearchParams({
-          movie_id: "" + movieId,
-        }).toString(),
+        pathname: `/movie/${movieId}`,
+        // search: createSearchParams({
+        //   movie_id: "" + movieId,
+        // }).toString(),
       });
-    } else {
     }
   };
 
-  useEffect(() => {
-    const findMovieType = async () => {
-      setIsMovieOwned(ownedMovie);
-      if (isMovieOwned) {
-        setMovieClassName("movie-card owned");
-      }
-    };
-    findMovieType();
-  }, [isMovieOwned, ownedMovie]);
+  useEffect(() => {}, []);
 
   return (
-    <div
-      className={movieClassName}
-      onClick={() => handleCardClick()}
-      title={title}
-    >
+    <div className="movie-card" title={title}>
       <h2>{title}</h2>
       <img src={poster} alt="movie poster"></img>
       <p>Price: ${price}</p>
-      <button onClick={handleBuy}>Buy</button>
+      {ownedMovie ? (
+        <button onClick={handleGoToMovie}>Go to movie</button>
+      ) : (
+        <button onClick={handleBuy}>Buy</button>
+      )}
     </div>
   );
 };

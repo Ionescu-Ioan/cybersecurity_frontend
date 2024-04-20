@@ -34,7 +34,6 @@ function Login(props) {
 
   const onEnter = (event) => {
     if (event.key === "Enter") {
-      // Check which field has focus and move to the next one
       const focusedField = document.activeElement;
       if (email && password) {
         onButtonClick();
@@ -63,13 +62,13 @@ function Login(props) {
 
     if (!loginResult.ok) {
       setFailedLogin(true);
-      // Hide the success message after 2 seconds
+
       setTimeout(() => {
         setFailedLogin(false);
       }, 2000);
       console.log("error");
     } else {
-      setFailedLogin(false); // Reset failedLogin status
+      setFailedLogin(false);
       const data = await loginResult.json();
       await login({ data });
     }
@@ -100,7 +99,7 @@ function Login(props) {
         <br />
         <div className={"inputContainer"}>
           <input
-            id="emailInput" // Added ID for focus targeting
+            id="emailInput"
             onKeyDown={onEnter}
             onPaste={(e) => e.preventDefault()}
             value={email}
@@ -113,7 +112,7 @@ function Login(props) {
         <br />
         <div className={"inputContainer"}>
           <input
-            id="passwordInput" // Added ID for focus targeting
+            id="passwordInput"
             onKeyDown={onEnter}
             onPaste={(e) => e.preventDefault()}
             value={password}

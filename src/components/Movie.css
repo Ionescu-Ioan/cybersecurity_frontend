@@ -86,11 +86,3 @@
   animation: 1s glitch;
   animation-timing-function: steps(2, end);
 }
-
-.movie-card.owned {
-  cursor: pointer;
-}
-
-.movie-card.owned button {
-  display: none;
-}

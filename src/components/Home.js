@@ -46,12 +46,16 @@ function Home(props) {
   };
 
   const loadSearchedMovies = (movieArray) => {
-      setAllMovies(movieArray);
+    setAllMovies(movieArray);
   };
 
   return (
     <div className="home-container">
-      <Navbar customMessage="Movie Library" searchBarActive={true} loadSearchedMoviesHandler={loadSearchedMovies}/>
+      <Navbar
+        customMessage="Movie Library"
+        searchBarActive={true}
+        loadSearchedMoviesHandler={loadSearchedMovies}
+      />
       <MovieList movies={allMovies} ownedMovie={false} />
     </div>
   );
