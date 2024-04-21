@@ -29,6 +29,10 @@
   text-overflow: ellipsis; /* Show ellipsis for overflowed text */
 }
 
+.div_interactive_button {
+  align-self: center;
+}
+
 .movie-card button,
 .movie-card button:after {
   border-radius: 30px 30px;

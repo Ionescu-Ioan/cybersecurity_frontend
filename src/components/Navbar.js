@@ -26,12 +26,18 @@ const getPayload = (token) => {
   }
 };
 
-function Navbar({ customMessage, searchBarActive, loadSearchedMoviesHandler }) {
-  const { user, login, logout } = useAuth();
+function Navbar({
+  customMessage,
+  searchBarActive,
+  loadSearchedMoviesHandler,
+  inLibrary,
+}) {
+  const { user, logout, CheckExpiredToken } = useAuth();
   const [payload, setPayload] = useState(null);
   const [searchText, setSearchText] = useState("");
   const [publicKey, setPublicKey] = useState("");
   const [showMenu, setShowMenu] = useState(false);
+
   const navigate = useNavigate();
 
   const handleGoToLibrary = () => {
@@ -40,10 +46,15 @@ function Navbar({ customMessage, searchBarActive, loadSearchedMoviesHandler }) {
   };
 
   const handleClearClick = async () => {
-    setSearchText("");
-    const response = await fetch("/movie/like?title=");
-    const data = await response.json();
-    loadSearchedMoviesHandler(data);
+    if (inLibrary) {
+      setSearchText("");
+      console.log("va urma");
+    } else {
+      setSearchText("");
+      const response = await fetch("/movie/like?title=");
+      const data = await response.json();
+      loadSearchedMoviesHandler(data);
+    }
   };
 
   const handleOnHomeClick = () => {
@@ -57,14 +68,18 @@ function Navbar({ customMessage, searchBarActive, loadSearchedMoviesHandler }) {
 
   const handleKeyPress = (event) => {
     if (event.key === "Enter") {
-      handleSearchEnter();
+      handleSearchEnter(inLibrary);
     }
   };
 
-  const handleSearchEnter = async () => {
-    const response = await fetch("/movie/like?title=" + searchText);
-    const data = await response.json();
-    loadSearchedMoviesHandler(data);
+  const handleSearchEnter = async (inLibrary) => {
+    if (inLibrary) {
+      console.log("va urma");
+    } else {
+      const response = await fetch("/movie/like?title=" + searchText);
+      const data = await response.json();
+      loadSearchedMoviesHandler(data);
+    }
   };
 
   const handleSearch = (event) => {
@@ -84,6 +99,8 @@ function Navbar({ customMessage, searchBarActive, loadSearchedMoviesHandler }) {
   };
 
   useEffect(() => {
+    CheckExpiredToken();
+
     const fetchPublicKey = async () => {
       try {
         const response = await fetch("/public_key");
@@ -102,8 +119,9 @@ function Navbar({ customMessage, searchBarActive, loadSearchedMoviesHandler }) {
       }
     };
     populateTokenPayload();
+    //CheckExpiredToken();
     console.log(customMessage);
-  }, []);
+  }, [CheckExpiredToken]);
 
   return (
     <header className="header">

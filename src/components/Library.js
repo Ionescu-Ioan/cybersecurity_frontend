@@ -4,9 +4,9 @@ import MovieList from "./MovieList";
 import Navbar from "./Navbar";
 
 function Library(props) {
-  const { user } = useAuth();
+  const { user, CheckExpiredToken } = useAuth();
   const [movieCollection, setMovieCollection] = useState([]);
-
+  //CheckExpiredToken();
   useEffect(() => {
     const getMovieCollection = async () => {
       const moviesRequest = await fetch("/movie/collection", {
@@ -23,21 +23,24 @@ function Library(props) {
 
       const moviesData = await moviesRequest.json();
       console.log(moviesRequest);
+      console.log(moviesData);
       setMovieCollection(moviesData);
     };
 
     getMovieCollection();
   }, []);
 
-  const loadSearchedMovies = (movieArray) => {
+  const loadSearchedMoviesFromLibrary = (movieArray) => {
     setMovieCollection(movieArray);
   };
+
   return (
     <div className="home-container">
       <Navbar
         customMessage="Your Library"
         searchBarActive={true}
-        loadSearchedMoviesHandler={loadSearchedMovies}
+        loadSearchedMoviesHandler={loadSearchedMoviesFromLibrary}
+        inLibrary={true}
       />
       <MovieList movies={movieCollection} ownedMovie={true} />
     </div>

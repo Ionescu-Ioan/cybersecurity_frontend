@@ -10,7 +10,7 @@ function MovieList({ movies, ownedMovie }) {
           key={index}
           title={movie.title}
           //poster={movie.poster}
-          poster="https://placehold.co/300x200"
+          poster={movie.poster_image_url}
           price={movie.price}
           ownedMovie={ownedMovie}
           movieId={movie.id}

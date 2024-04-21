@@ -3,7 +3,7 @@
   margin: 1%;
   padding: 20px;
 
-  margin-top: 10rem;
+  margin-top: 8rem;
   margin-bottom: 35px;
   display: inline-block;
   vertical-align: top;
@@ -88,10 +88,34 @@
   animation-timing-function: steps(2, end);
 }
 
-.user-card input:hover {
-  cursor: pointer;
-}
-
 ::-webkit-file-upload-button {
   display: none;
+}
+
+.funds_container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.add_funds {
+  cursor: pointer;
+  margin-left: 10px;
+  background-color: #d9c0e0;
+  border-radius: 5px;
+}
+
+.funds_input {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  padding: 0.6em 2em;
+  width: 100%;
+  max-width: 80px;
+  box-sizing: border-box;
+  font-size: 11px;
+}
+
+.file_input {
+  cursor: pointer;
 }

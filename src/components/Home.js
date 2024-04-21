@@ -14,6 +14,7 @@ function Home(props) {
       try {
         const response = await fetch("movie/all");
         const data = await response.json();
+        console.log(data);
         setAllMovies(data);
       } catch (error) {
         console.error("Error fetching movies:", error);
@@ -55,6 +56,7 @@ function Home(props) {
         customMessage="Movie Library"
         searchBarActive={true}
         loadSearchedMoviesHandler={loadSearchedMovies}
+        inLibrary={false}
       />
       <MovieList movies={allMovies} ownedMovie={false} />
     </div>

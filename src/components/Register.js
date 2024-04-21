@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAddressCard } from "@fortawesome/free-solid-svg-icons";
 import CustomFlashMessage from "./CustomFlashMessage";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../hooks/useAuth";
 
 function Register(props) {
   const [clicked, setClicked] = useState(false);
@@ -25,7 +26,12 @@ function Register(props) {
   const [firstNameError, setFirstNameError] = useState("");
   const [lastNameError, setLastNameError] = useState("");
   const [passwordError, setPasswordError] = useState("");
+  const { user, CheckExpiredToken } = useAuth();
   const navigate = useNavigate();
+
+  if (user) {
+    CheckExpiredToken();
+  }
 
   const handleToggle = () => {
     if (type === "password") {
@@ -97,6 +103,7 @@ function Register(props) {
 
   return (
     <div>
+      <br></br>
       {succeededToRegister ? (
         <CustomFlashMessage
           message="Registered! - You will be redirect to Login page."

@@ -19,7 +19,7 @@ function Login(props) {
   const [iconEye, setIcon] = useState(eyeOff);
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
-  const { login } = useAuth();
+  const { user, login, CheckExpiredToken } = useAuth();
   const navigate = useNavigate();
 
   const handleToggle = () => {
@@ -80,6 +80,7 @@ function Login(props) {
 
   return (
     <div>
+      <br></br>
       {failedLogin ? (
         <CustomFlashMessage
           message="Login failed!"

@@ -14,14 +14,14 @@ function MoviePage({ movieId }) {
         console.error("Error fetching movie:", error);
       }
     };
-    // fetchMovie();
+    fetchMovie();
   }, []);
 
   return (
     <div className="home-container">
       <Navbar customMessage="Enjoy the movie!" searchBarActive={false} />
       <div>Pagina de film</div>
-      <video src=""></video>
+      <video src="" alt="The movie is playing! :)"></video>
     </div>
   );
 }
