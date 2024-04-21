@@ -48,7 +48,15 @@ function Navbar({
   const handleClearClick = async () => {
     if (inLibrary) {
       setSearchText("");
-      console.log("va urma");
+      const response = await fetch("/movie/owned/like?title=", {
+        headers: {
+          Authorization: `Bearer ${user.data.token}`,
+        },
+        method: "GET",
+        mode: "cors",
+      });
+      const data = await response.json();
+      loadSearchedMoviesHandler(data);
     } else {
       setSearchText("");
       const response = await fetch("/movie/like?title=");
@@ -74,7 +82,15 @@ function Navbar({
 
   const handleSearchEnter = async (inLibrary) => {
     if (inLibrary) {
-      console.log("va urma");
+      const response = await fetch("/movie/owned/like?title=" + searchText, {
+        headers: {
+          Authorization: `Bearer ${user.data.token}`,
+        },
+        method: "GET",
+        mode: "cors",
+      });
+      const data = await response.json();
+      loadSearchedMoviesHandler(data);
     } else {
       const response = await fetch("/movie/like?title=" + searchText);
       const data = await response.json();

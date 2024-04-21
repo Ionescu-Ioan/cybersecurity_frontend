@@ -4,6 +4,7 @@ import { useAuth } from "../hooks/useAuth";
 import * as jose from "jose";
 import "./UserProfile.css";
 import CustomFlashMessage from "./CustomFlashMessage";
+import InformativeMessage from "./InformativeMessage";
 
 function UserProfile() {
   const [userData, setuserData] = useState(null);
@@ -16,6 +17,7 @@ function UserProfile() {
   const [succeededToAddFunds, setSucceededToAddFunds] = useState(false);
   const [failedToAddFunds, setFailedToAddFunds] = useState(false);
   const [requestMessage, setRequestMessage] = useState("");
+  const [attemptedToAddFunds, setAttemptedToAddFunds] = useState(false);
   const inputElement = useRef();
 
   const handleConfirmUpload = async () => {};
@@ -23,6 +25,11 @@ function UserProfile() {
     setFundsInput(event.target.value);
   };
   const handleAddFunds = async () => {
+    setAttemptedToAddFunds(true);
+    // setTimeout(() => {
+    //   setAttemptedToAddFunds(false);
+    // }, 2000);
+
     const data = new FormData();
     data.append("funds", fundsInput);
     const funds = await fetch("/user/add_funds", {
@@ -113,6 +120,16 @@ function UserProfile() {
               customClassName="flash-message danger"
             />
           ) : null}
+
+          {attemptedToAddFunds ? (
+            <InformativeMessage
+              message={fundsInput}
+              customClassName="flash-message danger"
+            />
+          ) : (
+            <div></div>
+          )}
+
           <br></br>
           <h2>Your Data</h2>
           <img

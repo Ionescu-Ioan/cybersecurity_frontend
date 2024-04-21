@@ -1,6 +1,6 @@
 // Movie.js
-import React, { useState, useEffect } from "react";
-import { useNavigate, createSearchParams } from "react-router-dom";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./Movie.css";
 import { useAuth } from "../hooks/useAuth";
 import "./InteractiveButton";
@@ -49,22 +49,13 @@ const Movie = ({ title, poster, price, ownedMovie, movieId }) => {
       }, 3000);
     }
 
-    // Handle buying logic here
     console.log(`You bought ${title} for ${price}`);
   };
   const handleGoToMovie = () => {
     if (ownedMovie) {
-      console.log("merge butonul Go to movie!");
-      navigate({
-        pathname: `/movie/${movieId}`,
-        // search: createSearchParams({
-        //   movie_id: "" + movieId,
-        // }).toString(),
-      });
+      navigate("/movie?movie_id=" + movieId);
     }
   };
-
-  useEffect(() => {}, []);
 
   return (
     <div className="movie-card" title={title}>

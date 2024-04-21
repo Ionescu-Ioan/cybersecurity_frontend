@@ -1,0 +1,16 @@
+#session-expired-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+#session-expired-message {
+  font-size: 18px;
+  color: #333;
+}

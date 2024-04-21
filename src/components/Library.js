@@ -3,10 +3,10 @@ import { useEffect, useState } from "react";
 import MovieList from "./MovieList";
 import Navbar from "./Navbar";
 
-function Library(props) {
-  const { user, CheckExpiredToken } = useAuth();
+function Library() {
+  const { user } = useAuth();
   const [movieCollection, setMovieCollection] = useState([]);
-  //CheckExpiredToken();
+
   useEffect(() => {
     const getMovieCollection = async () => {
       const moviesRequest = await fetch("/movie/collection", {
@@ -42,7 +42,11 @@ function Library(props) {
         loadSearchedMoviesHandler={loadSearchedMoviesFromLibrary}
         inLibrary={true}
       />
-      <MovieList movies={movieCollection} ownedMovie={true} />
+      {movieCollection.length === 0 ? (
+        <div>You don't have any movies yet. Go buy some!</div>
+      ) : (
+        <MovieList movies={movieCollection} ownedMovie={true} />
+      )}
     </div>
   );
 }

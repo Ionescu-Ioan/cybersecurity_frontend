@@ -9,7 +9,7 @@ import Library from "./components/Library.js";
 import MoviePage from "./components/MoviePage.js";
 import UserProfile from "./components/UserProfile.js";
 import { AuthProvider } from "./hooks/useAuth";
-
+import SessionExpired from "./components/SessionExpired.js";
 function App() {
   return (
     <AuthProvider>
@@ -18,9 +18,10 @@ function App() {
           <Route index element={<Home />} />
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
+          <Route path="session_expired" element={<SessionExpired />} />
           <Route path="*" element={<Home />} />
           {/* <Route path="movie" element={<MoviePage />} /> */}
-          <Route path="movie/:movieId" element={<MoviePage />} />
+          <Route path="movie" element={<MoviePage />} />
           <Route
             path="profile"
             element={

@@ -35,13 +35,15 @@ export const AuthProvider = ({ children }) => {
       parseInt(payload.created_at, 10) + parseInt(payload.expires_in, 10)
     ) {
       console.log("You will be logged out! The token has expired!");
-      logout();
+      navigate("/session_expired", { replace: true });
+      //logout();
     }
   };
 
   useEffect(() => {
-    const interval = setInterval(CheckExpiredToken, 2000); // Check every 2 seconds, adjust as needed
-    return () => clearInterval(interval);
+    // const interval = setInterval(CheckExpiredToken, 2000); // Check every 2 seconds, adjust as needed
+    // return () => clearInterval(interval);
+    CheckExpiredToken();
   }, [user]); // Run effect whenever user changes
 
   const value = useMemo(
