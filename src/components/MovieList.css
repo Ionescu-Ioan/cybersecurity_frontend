@@ -23,3 +23,27 @@
     gap: 35px;
   }
 }
+
+.empty_library_message {
+  /* display: flex;
+  flex-direction: column; */
+  color: #fff;
+  display: flex;
+  justify-items: center;
+  align-items: center;
+  margin-top: 12rem;
+  margin-bottom: 35px;
+  gap: 35px;
+}
+
+@media screen and (min-width: 1150px) {
+  .empty_library_message {
+    color: #fff;
+    display: flex;
+    justify-items: center;
+    align-items: center;
+    margin-top: 12rem;
+    margin-bottom: 35px;
+    gap: 35px;
+  }
+}

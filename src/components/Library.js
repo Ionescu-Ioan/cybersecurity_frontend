@@ -42,8 +42,11 @@ function Library() {
         loadSearchedMoviesHandler={loadSearchedMoviesFromLibrary}
         inLibrary={true}
       />
+
       {movieCollection.length === 0 ? (
-        <div>You don't have any movies yet. Go buy some!</div>
+        <div className="empty_library_message">
+          <h1>You don't have any movies yet. Go buy some!</h1>
+        </div>
       ) : (
         <MovieList movies={movieCollection} ownedMovie={true} />
       )}

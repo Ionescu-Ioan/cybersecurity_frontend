@@ -26,9 +26,9 @@ function UserProfile() {
   };
   const handleAddFunds = async () => {
     setAttemptedToAddFunds(true);
-    // setTimeout(() => {
-    //   setAttemptedToAddFunds(false);
-    // }, 2000);
+    setTimeout(() => {
+      setAttemptedToAddFunds(false);
+    }, 4000);
 
     const data = new FormData();
     data.append("funds", fundsInput);
@@ -42,6 +42,7 @@ function UserProfile() {
       mode: "cors",
     });
     inputElement.current.value = "";
+    setFundsInput("");
     const response = await funds.json();
     console.log(response);
 
@@ -107,74 +108,80 @@ function UserProfile() {
       )}
 
       {userData ? (
-        <div className="user-card">
-          {succeededToAddFunds ? (
-            <CustomFlashMessage
-              message="Funds successfully added!"
-              customClassName="flash-message success"
-            />
-          ) : null}
-          {failedToAddFunds ? (
-            <CustomFlashMessage
-              message={requestMessage}
-              customClassName="flash-message danger"
-            />
-          ) : null}
+        <div className="user-profile-container">
+          <div className="user-card">
+            <br></br>
+            <h2>Your Data</h2>
+            <br></br>
+            <img
+              className="profile_pic"
+              src={profilePicURL}
+              alt="profile picture"
+              title="Your profile picture"
+            ></img>
+            <br></br>
+            <p>First name: {userData[0].first_name}</p>
+            <p>Last name: {userData[0].last_name}</p>
+            <p>Email: {userData[0].email}</p>
+            <br></br>
 
-          {attemptedToAddFunds ? (
-            <InformativeMessage
-              message={fundsInput}
-              customClassName="flash-message danger"
-            />
-          ) : (
-            <div></div>
-          )}
-
-          <br></br>
-          <h2>Your Data</h2>
-          <img
-            src={profilePicURL}
-            alt="profile picture"
-            title="Your profile picture"
-          ></img>
-          <br></br>
-          <p>First name: {userData[0].first_name}</p>
-          <p>Last name: {userData[0].last_name}</p>
-          <p>Email: {userData[0].email}</p>
-          <br></br>
-
-          <div className="funds_container">
+            <label for="myfile" title="Recommended picture size:300x200">
+              Select profile picture:
+            </label>
             <input
-              type="text"
-              placeholder="Ex. 20"
-              className="funds_input"
-              onChange={handleFundsValueChange}
-              title="Enter the amount of funds"
-              ref={inputElement}
+              type="file"
+              id="myfile"
+              onChange={handleUploadProfilePic}
+              title="Choose file"
+              className="file_input"
             />
-            <p>$</p>
-            <div className="add_funds" onClick={handleAddFunds}>
-              Add funds
-            </div>
+
+            <br></br>
+            <button onClick={handleConfirmUpload}>Upload picture</button>
           </div>
+          <div className="user-card">
+            {attemptedToAddFunds ? (
+              <InformativeMessage
+                message={fundsInput}
+                customClassName="flash-message informative"
+              />
+            ) : (
+              <div></div>
+            )}
+            {succeededToAddFunds ? (
+              <CustomFlashMessage
+                message="Funds successfully added!"
+                customClassName="flash-message success"
+              />
+            ) : null}
+            {failedToAddFunds ? (
+              <CustomFlashMessage
+                message={requestMessage}
+                customClassName="flash-message danger"
+              />
+            ) : null}
 
-          <p>Held funds: ${userData[0].funds}</p>
+            <br></br>
+            <h2>Held funds: ${userData[0].funds}</h2>
 
-          <br></br>
+            <br></br>
+            <div className="add_funds_container">
+              <input
+                type="text"
+                placeholder="Ex. 20"
+                className="funds_input"
+                onChange={handleFundsValueChange}
+                title="Enter the amount of funds"
+                ref={inputElement}
+              />
+              <p>$</p>
+              <div className="add_funds_button" onClick={handleAddFunds}>
+                Add funds
+              </div>
+            </div>
 
-          <label for="myfile" title="Recommended picture size:300x200">
-            Select profile picture:
-          </label>
-          <input
-            type="file"
-            id="myfile"
-            onChange={handleUploadProfilePic}
-            title="Choose file"
-            className="file_input"
-          />
-
-          <br></br>
-          <button onClick={handleConfirmUpload}>Upload picture</button>
+            <br></br>
+          </div>
         </div>
       ) : (
         <div></div>

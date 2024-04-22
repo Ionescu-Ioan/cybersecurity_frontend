@@ -4,13 +4,16 @@
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
-  background-color: #fff;
+  background-color: #3f3f3fb9;
   border: 1px solid #ccc;
   padding: 20px;
   border-radius: 5px;
 }
 
 #session-expired-message {
-  font-size: 18px;
-  color: #333;
+  color: #fff;
+  display: flex;
+  justify-items: center;
+  align-items: center;
+  margin-bottom: 35px;
 }

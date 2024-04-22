@@ -1,14 +1,10 @@
 import React, { useEffect } from "react";
 
 function createMarkup(message) {
-  return { __html: message };
+  return { __html: "You attempted to add " + message + " $" };
 }
 
 const InformativeMessage = ({ message, customClassName }) => {
-  //   useEffect = () => {
-  //     console.log(message);
-  //     console.log(createMarkup(message));
-  //   };
   return (
     <div
       className={customClassName}

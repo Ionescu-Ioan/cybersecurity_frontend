@@ -9,7 +9,7 @@ const SessionExpired = () => {
   useEffect(() => {
     const timeout = setTimeout(() => {
       logout();
-    }, 10000); // 10 seconds
+    }, 6000);
 
     return () => clearTimeout(timeout);
   }, [navigate]);
@@ -17,7 +17,7 @@ const SessionExpired = () => {
   return (
     <div id="session-expired-container">
       <p id="session-expired-message">
-        Your session has expired, you will be logged out shortly.
+        <h1>Your session has expired, you will be logged out shortly!</h1>
       </p>
     </div>
   );

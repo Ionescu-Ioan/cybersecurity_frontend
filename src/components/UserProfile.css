@@ -3,8 +3,6 @@
   margin: 1%;
   padding: 20px;
 
-  margin-top: 8rem;
-  margin-bottom: 35px;
   display: inline-block;
   vertical-align: top;
   text-align: center;
@@ -25,9 +23,9 @@
 
 .user-card h2 {
   margin-top: 0;
-  white-space: nowrap; /* Prevent title from wrapping */
-  overflow: hidden; /* Hide overflowing text */
-  text-overflow: ellipsis; /* Show ellipsis for overflowed text */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .user-card button,
@@ -92,13 +90,12 @@
   display: none;
 }
 
-.funds_container {
+.add_funds_container {
   display: flex;
   flex-direction: row;
-  align-items: center;
 }
 
-.add_funds {
+.add_funds_button {
   cursor: pointer;
   margin-left: 10px;
   background-color: #d9c0e0;
@@ -118,4 +115,17 @@
 
 .file_input {
   cursor: pointer;
+}
+
+.profile_pic {
+  width: 300px;
+  height: 200px;
+}
+
+.user-profile-container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 8rem;
+  margin-bottom: 35px;
+  gap: 2rem;
 }

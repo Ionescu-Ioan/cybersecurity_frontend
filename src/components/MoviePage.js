@@ -3,7 +3,7 @@ import { useSearchParams } from "react-router-dom";
 import Navbar from "./Navbar";
 import { useAuth } from "../hooks/useAuth";
 import CustomFlashMessage from "./CustomFlashMessage";
-
+import "./MoviePage.css";
 function MoviePage() {
   const [movie, setMovie] = useState();
   const [searchParams] = useSearchParams();
@@ -60,7 +60,7 @@ function MoviePage() {
   }, []);
 
   return (
-    <div className="home-container">
+    <div className="movie-page-home-container">
       <Navbar customMessage="Enjoy the movie!" searchBarActive={false} />
 
       <div className="movie-card">
@@ -77,7 +77,22 @@ function MoviePage() {
           />
         ) : null}
 
-        {movie ? <h2>{movie.title}</h2> : <h2></h2>}
+        {movie ? (
+          <div>
+            <h2 title="movie title">{movie.title} </h2>
+            <br></br>
+            <div className="video_container" title="video file :)">
+              {" "}
+              <br></br>
+              <h3>The movie is playing right now... :)</h3>
+              <br></br>
+            </div>
+          </div>
+        ) : (
+          <div>
+            <h2> </h2>
+          </div>
+        )}
         <br></br>
       </div>
     </div>
