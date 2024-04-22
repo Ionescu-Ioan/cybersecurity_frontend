@@ -45,7 +45,7 @@ function Library() {
 
       {movieCollection.length === 0 ? (
         <div className="empty_library_message">
-          <h1>You don't have any movies yet. Go buy some!</h1>
+          <h1>Looks so empty! :(</h1>
         </div>
       ) : (
         <MovieList movies={movieCollection} ownedMovie={true} />
