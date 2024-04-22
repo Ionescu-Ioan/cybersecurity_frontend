@@ -20,7 +20,7 @@ function App() {
           <Route path="register" element={<Register />} />
           <Route path="session_expired" element={<SessionExpired />} />
           <Route path="*" element={<Home />} />
-          {/* <Route path="movie" element={<MoviePage />} /> */}
+
           <Route path="movie" element={<MoviePage />} />
           <Route
             path="profile"

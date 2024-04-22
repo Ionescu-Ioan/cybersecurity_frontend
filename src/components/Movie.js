@@ -1,5 +1,4 @@
-// Movie.js
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Movie.css";
 import { useAuth } from "../hooks/useAuth";
@@ -8,17 +7,16 @@ import InteractiveButton from "./InteractiveButton";
 import CustomFlashMessage from "./CustomFlashMessage";
 
 const Movie = ({ title, poster, price, ownedMovie, movieId }) => {
-  const { user, login, logout } = useAuth();
-  const [isMovieOwned, setIsMovieOwned] = useState(false);
-  const [movieClassName, setMovieClassName] = useState("movie-card");
+  const { user } = useAuth();
   const [succeededToBuyMovie, setSucceededToBuyMovie] = useState(false);
   const [failedToBuyMovie, setFailedToBuyMovie] = useState(false);
   const [requestMessage, setRequestMessage] = useState("");
   const navigate = useNavigate();
+  const movieCard = useRef();
 
   const handleBuy = async () => {
     const data = new FormData();
-    data.append("movie_id", movieId);
+    data.append("movie_id", movieCard.current.id);
     const response = await fetch("/movie/buy", {
       headers: {
         Authorization: `Bearer ${user.data.token}`,
@@ -30,7 +28,6 @@ const Movie = ({ title, poster, price, ownedMovie, movieId }) => {
     });
 
     const res = await response.json();
-    console.log(res);
 
     if (res.hasOwnProperty("err")) {
       setFailedToBuyMovie(true);
@@ -48,8 +45,6 @@ const Movie = ({ title, poster, price, ownedMovie, movieId }) => {
         setSucceededToBuyMovie(false);
       }, 3000);
     }
-
-    console.log(`You bought ${title} for ${price}`);
   };
   const handleGoToMovie = () => {
     if (ownedMovie) {
@@ -58,7 +53,7 @@ const Movie = ({ title, poster, price, ownedMovie, movieId }) => {
   };
 
   return (
-    <div className="movie-card" title={title}>
+    <div className="movie-card" title={title} id={movieId} ref={movieCard}>
       {succeededToBuyMovie ? (
         <CustomFlashMessage
           message="Movie successfully added in your library!"

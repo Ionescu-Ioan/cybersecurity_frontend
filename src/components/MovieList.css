@@ -1,7 +1,4 @@
-/* MovieList.css */
 .movie-list {
-  /* display: flex;
-  flex-direction: column; */
   display: grid;
   grid-template-columns: repeat(1, 1fr);
   justify-items: center;
@@ -16,8 +13,8 @@
   .movie-list {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    justify-items: center; /*seems to do nothing*/
-    align-items: center; /*seems to do nothing*/
+    justify-items: center;
+    align-items: center;
     margin-top: 10rem;
     margin-bottom: 35px;
     gap: 35px;
@@ -25,8 +22,6 @@
 }
 
 .empty_library_message {
-  /* display: flex;
-  flex-direction: column; */
   color: #fff;
   display: flex;
   justify-items: center;

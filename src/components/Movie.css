@@ -24,9 +24,9 @@
 
 .movie-card h2 {
   margin-top: 0;
-  white-space: nowrap; /* Prevent title from wrapping */
-  overflow: hidden; /* Hide overflowing text */
-  text-overflow: ellipsis; /* Show ellipsis for overflowed text */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .div_interactive_button {

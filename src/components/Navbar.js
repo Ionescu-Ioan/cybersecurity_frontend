@@ -35,7 +35,7 @@ function Navbar({
   const { user, logout, CheckExpiredToken } = useAuth();
   const [payload, setPayload] = useState(null);
   const [searchText, setSearchText] = useState("");
-  const [publicKey, setPublicKey] = useState("");
+
   const [showMenu, setShowMenu] = useState(false);
 
   const navigate = useNavigate();
@@ -117,17 +117,6 @@ function Navbar({
   useEffect(() => {
     CheckExpiredToken();
 
-    const fetchPublicKey = async () => {
-      try {
-        const response = await fetch("/public_key");
-        const data = await response.json();
-        setPublicKey(data);
-      } catch (error) {
-        console.error("Error fetching public key:", error);
-      }
-    };
-    fetchPublicKey();
-
     const populateTokenPayload = () => {
       if (user) {
         const decodedPayload = getPayload(user.data.token);
@@ -135,8 +124,6 @@ function Navbar({
       }
     };
     populateTokenPayload();
-    //CheckExpiredToken();
-    console.log(customMessage);
   }, [CheckExpiredToken]);
 
   return (
@@ -219,7 +206,6 @@ function Navbar({
               <li className="nav__item">
                 <span
                   className="user_icon"
-                  // title={`Hello, ${payload.first_name}!`}
                   title="Go to your profile"
                   onClick={handleUserIconClick}
                 >

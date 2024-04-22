@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import Navbar from "./Navbar";
 import { useAuth } from "../hooks/useAuth";
-import * as jose from "jose";
 import "./UserProfile.css";
 import CustomFlashMessage from "./CustomFlashMessage";
 import InformativeMessage from "./InformativeMessage";
@@ -16,11 +15,49 @@ function UserProfile() {
   const [fundsInput, setFundsInput] = useState("");
   const [succeededToAddFunds, setSucceededToAddFunds] = useState(false);
   const [failedToAddFunds, setFailedToAddFunds] = useState(false);
+
+  const [succeededToUploadPic, setSucceededToUploadPic] = useState(false);
+  const [failedToUploadPic, setFailedToUploadPic] = useState(false);
+
   const [requestMessage, setRequestMessage] = useState("");
   const [attemptedToAddFunds, setAttemptedToAddFunds] = useState(false);
   const inputElement = useRef();
 
-  const handleConfirmUpload = async () => {};
+  const handleConfirmUpload = async () => {
+    const pic = new FormData();
+    pic.append("profile_pic", profilePic);
+
+    const uploadedPic = await fetch("/user/profile_pic/upload", {
+      headers: {
+        Authorization: `Bearer ${user.data.token}`,
+      },
+      body: pic,
+
+      method: "POST",
+      mode: "cors",
+    });
+
+    const picResponse = await uploadedPic.json();
+
+    if (picResponse.hasOwnProperty("err")) {
+      setFailedToUploadPic(true);
+
+      setSucceededToUploadPic(false);
+      setRequestMessage(picResponse["err"]);
+      setTimeout(() => {
+        setFailedToUploadPic(false);
+      }, 2000);
+    } else {
+      setFailedToUploadPic(false);
+      setSucceededToUploadPic(true);
+      setRequestMessage(picResponse["msg"]);
+      setTimeout(() => {
+        setSucceededToUploadPic(false);
+      }, 2000);
+    }
+
+    getUserData();
+  };
   const handleFundsValueChange = async (event) => {
     setFundsInput(event.target.value);
   };
@@ -44,7 +81,6 @@ function UserProfile() {
     inputElement.current.value = "";
     setFundsInput("");
     const response = await funds.json();
-    console.log(response);
 
     if (response.hasOwnProperty("err")) {
       setFailedToAddFunds(true);
@@ -65,11 +101,10 @@ function UserProfile() {
 
     getUserData();
   };
-  const handleUploadProfilePic = async (e) => {
-    console.log(e.target.files);
+  const handleUploadProfilePic = (e) => {
     try {
-      const path = URL.createObjectURL(e.target.files[0]);
-      setProfilePic(path);
+      setProfilePic(e.target.files[0]);
+      console.log(e.target.files[0]);
     } catch (error) {
       console.log(error);
     }
@@ -88,7 +123,6 @@ function UserProfile() {
 
     setProfilePicURL(resUserData[0].profile_picture_url);
 
-    console.log(resUserData);
     setuserData(resUserData);
   };
 
@@ -110,6 +144,18 @@ function UserProfile() {
       {userData ? (
         <div className="user-profile-container">
           <div className="user-card">
+            {succeededToUploadPic ? (
+              <CustomFlashMessage
+                message="Picture successfully uploaded!"
+                customClassName="flash-message success"
+              />
+            ) : null}
+            {failedToUploadPic ? (
+              <CustomFlashMessage
+                message={requestMessage}
+                customClassName="flash-message danger"
+              />
+            ) : null}
             <br></br>
             <h2>Your Data</h2>
             <br></br>

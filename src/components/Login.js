@@ -10,16 +10,13 @@ import { useAuth } from "../hooks/useAuth";
 import CustomFlashMessage from "./CustomFlashMessage";
 import { useNavigate } from "react-router-dom";
 
-function Login(props) {
-  const [clicked, setClicked] = useState(false);
+function Login() {
   const [failedLogin, setFailedLogin] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [type, setType] = useState("password");
   const [iconEye, setIcon] = useState(eyeOff);
-  const [emailError, setEmailError] = useState("");
-  const [passwordError, setPasswordError] = useState("");
-  const { user, login, CheckExpiredToken } = useAuth();
+  const { login } = useAuth();
   const navigate = useNavigate();
 
   const handleToggle = () => {
@@ -46,7 +43,6 @@ function Login(props) {
   };
 
   const onButtonClick = async () => {
-    setClicked(true);
     const loginResult = await fetch("/login", {
       headers: {
         "Content-Type": "application/json",
@@ -66,7 +62,6 @@ function Login(props) {
       setTimeout(() => {
         setFailedLogin(false);
       }, 2000);
-      console.log("error");
     } else {
       setFailedLogin(false);
       const data = await loginResult.json();
@@ -108,7 +103,6 @@ function Login(props) {
             onChange={(ev) => setEmail(ev.target.value)}
             className={"inputBox"}
           />
-          <label className="errorLabel">{emailError}</label>
         </div>
         <br />
         <div className={"inputContainer"}>
@@ -125,7 +119,6 @@ function Login(props) {
           <span className="password-icon" onClick={handleToggle}>
             <Icon icon={iconEye} size={25} />
           </span>
-          <label className="errorLabel">{passwordError}</label>
         </div>
         <br />
         <div className={"ButtonContainer"}>

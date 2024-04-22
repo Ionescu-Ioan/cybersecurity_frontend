@@ -9,7 +9,6 @@ function MovieList({ movies, ownedMovie }) {
         <Movie
           key={index}
           title={movie.title}
-          //poster={movie.poster}
           poster={movie.poster_image_url}
           price={movie.price}
           ownedMovie={ownedMovie}

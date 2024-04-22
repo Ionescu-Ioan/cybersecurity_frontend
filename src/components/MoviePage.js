@@ -12,7 +12,6 @@ function MoviePage() {
   const [succeededToFetchMovie, setSucceededToFetchMovie] = useState(false);
   const [failedToFetchMovie, setFailedToFetchMovie] = useState(false);
   const [requestMessage, setRequestMessage] = useState("");
-  // const [movieTitle, setMovieTitle] = useState("");
 
   useEffect(() => {
     const fetchMovie = async () => {
@@ -30,8 +29,6 @@ function MoviePage() {
         );
 
         const data = await response.json();
-
-        console.log(data);
 
         if (data.hasOwnProperty("err")) {
           setFailedToFetchMovie(true);

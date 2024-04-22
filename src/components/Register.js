@@ -10,8 +10,7 @@ import CustomFlashMessage from "./CustomFlashMessage";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 
-function Register(props) {
-  const [clicked, setClicked] = useState(false);
+function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [failedToRegister, setFailedToRegister] = useState(false);
@@ -22,10 +21,7 @@ function Register(props) {
   const [last_name, setLastName] = useState("");
   const [type, setType] = useState("password");
   const [iconEye, setIcon] = useState(eyeOff);
-  const [emailError, setEmailError] = useState("");
-  const [firstNameError, setFirstNameError] = useState("");
-  const [lastNameError, setLastNameError] = useState("");
-  const [passwordError, setPasswordError] = useState("");
+
   const { user, CheckExpiredToken } = useAuth();
   const navigate = useNavigate();
 
@@ -45,7 +41,6 @@ function Register(props) {
 
   const onEnter = (event) => {
     if (event.key === "Enter") {
-      // Check which field has focus and move to the next one
       const focusedField = document.activeElement;
       if (first_name && last_name && email && password && confirmed_password) {
         onButtonClick();
@@ -71,8 +66,6 @@ function Register(props) {
     data.append("check_password", confirmed_password);
     data.append("first_name", first_name);
     data.append("last_name", last_name);
-
-    console.log(data.getAll("email"));
 
     setClicked(true);
     fetch("/user/register", {
