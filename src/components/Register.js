@@ -67,7 +67,6 @@ function Register() {
     data.append("first_name", first_name);
     data.append("last_name", last_name);
 
-    setClicked(true);
     fetch("/user/register", {
       method: "POST",
       mode: "cors",
@@ -132,7 +131,6 @@ function Register() {
             onChange={(ev) => setFirstName(ev.target.value)}
             className={"inputBox"}
           />
-          <label className="errorLabel">{firstNameError}</label>
         </div>
 
         <br />
@@ -147,7 +145,6 @@ function Register() {
             onChange={(ev) => setLastName(ev.target.value)}
             className={"inputBox"}
           />
-          <label className="errorLabel">{lastNameError}</label>
         </div>
 
         <br />
@@ -162,7 +159,6 @@ function Register() {
             onChange={(ev) => setEmail(ev.target.value)}
             className={"inputBox"}
           />
-          <label className="errorLabel">{emailError}</label>
         </div>
 
         <br />
@@ -178,7 +174,6 @@ function Register() {
             className={"inputBox"}
             type={type}
           />
-          <label className="errorLabel">{passwordError}</label>
         </div>
 
         <br />
@@ -197,7 +192,6 @@ function Register() {
           <span className="password-icon" onClick={handleToggle}>
             <Icon icon={iconEye} size={25} />
           </span>
-          <label className="errorLabel">{passwordError}</label>
         </div>
 
         <br />

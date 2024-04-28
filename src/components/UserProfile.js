@@ -11,6 +11,7 @@ function UserProfile() {
     "https://placehold.co/300x200"
   );
   const [profilePic, setProfilePic] = useState();
+
   const { user } = useAuth();
   const [fundsInput, setFundsInput] = useState("");
   const [succeededToAddFunds, setSucceededToAddFunds] = useState(false);
@@ -119,7 +120,18 @@ function UserProfile() {
       mode: "cors",
     });
 
+    const pic = await fetch("/user/profile_pic/get", {
+      headers: {
+        Authorization: `Bearer ${user.data.token}`,
+      },
+      method: "GET",
+      mode: "cors",
+    });
+
     const resUserData = await res.json();
+    const resPic = await pic.json();
+
+    console.log(resPic);
 
     setProfilePicURL(resUserData[0].profile_picture_url);
 
