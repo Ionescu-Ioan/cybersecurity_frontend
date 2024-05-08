@@ -13,13 +13,11 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useLocalStorage("user", null);
   const navigate = useNavigate();
 
-  // call this function when you want to authenticate the user
   const login = async (data) => {
     setUser(data);
     navigate("/");
   };
 
-  // call this function to sign out logged in user
   const logout = () => {
     setUser(null);
     navigate("/", { replace: true });
@@ -36,15 +34,12 @@ export const AuthProvider = ({ children }) => {
     ) {
       console.log("You will be logged out! The token has expired!");
       navigate("/session_expired", { replace: true });
-      //logout();
     }
   };
 
   useEffect(() => {
-    // const interval = setInterval(CheckExpiredToken, 2000); // Check every 2 seconds, adjust as needed
-    // return () => clearInterval(interval);
     CheckExpiredToken();
-  }, [user]); // Run effect whenever user changes
+  }, [user]);
 
   const value = useMemo(
     () => ({

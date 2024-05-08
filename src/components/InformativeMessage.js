@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 
 function createMarkup(message) {
   return { __html: "You attempted to add " + message + " $" };

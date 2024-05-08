@@ -11,6 +11,7 @@ function UserProfile() {
     "https://placehold.co/300x200"
   );
   const [profilePic, setProfilePic] = useState();
+  const inputPic = useRef();
 
   const { user } = useAuth();
   const [fundsInput, setFundsInput] = useState("");
@@ -58,6 +59,8 @@ function UserProfile() {
     }
 
     getUserData();
+
+    inputPic.current.value = null;
   };
   const handleFundsValueChange = async (event) => {
     setFundsInput(event.target.value);
@@ -192,6 +195,7 @@ function UserProfile() {
               onChange={handleUploadProfilePic}
               title="Choose file"
               className="file_input"
+              ref={inputPic}
             />
 
             <br></br>

@@ -129,7 +129,7 @@ function Login() {
         <div className={"RegisterContainer"}>
           <span>
             Don't have an account?{" "}
-            <a href="#" className="RegisterLink" onClick={onRegisterClick}>
+            <a href="" className="RegisterLink" onClick={onRegisterClick}>
               Register
             </a>
           </span>
