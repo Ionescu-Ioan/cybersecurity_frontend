@@ -12,6 +12,7 @@ import "./Navbar.css";
 import UserIcon from "./UserIcon.js";
 import { useAuth } from "../hooks/useAuth";
 import * as jose from "jose";
+import CustomFlashMessage from "./CustomFlashMessage.js";
 
 const getPayload = (token) => {
   if (!token) {
@@ -35,6 +36,7 @@ function Navbar({
   const { user, logout, CheckExpiredToken } = useAuth();
   const [payload, setPayload] = useState(null);
   const [searchText, setSearchText] = useState("");
+  const [enterPressed, setEnterPressed] = useState(false);
 
   const [showMenu, setShowMenu] = useState(false);
 
@@ -43,6 +45,21 @@ function Navbar({
   const handleGoToLibrary = () => {
     closeMenuOnMobile();
     navigate("/library");
+  };
+
+  const CheckExpirationTime = () => {
+    if (!user || !user.data || !user.data.token) return;
+
+    const payload = jose.decodeJwt(user.data.token);
+
+    if (
+      Math.floor(Date.now() / 1000) >
+      parseInt(payload.created_at, 10) + parseInt(payload.expires_in, 10)
+    ) {
+      return true;
+    } else {
+      return false;
+    }
   };
 
   const handleClearClick = async () => {
@@ -59,9 +76,12 @@ function Navbar({
       loadSearchedMoviesHandler(data);
     } else {
       setSearchText("");
-      const response = await fetch("/movie/like?title=");
-      const data = await response.json();
-      loadSearchedMoviesHandler(data);
+
+      if (!CheckExpirationTime()) {
+        const response = await fetch("/movie/like?title=");
+        const data = await response.json();
+        loadSearchedMoviesHandler(data);
+      }
     }
   };
 
@@ -77,24 +97,29 @@ function Navbar({
   const handleKeyPress = (event) => {
     if (event.key === "Enter") {
       handleSearchEnter(inLibrary);
+      setEnterPressed(true);
     }
   };
 
   const handleSearchEnter = async (inLibrary) => {
     if (inLibrary) {
-      const response = await fetch("/movie/owned/like?title=" + searchText, {
-        headers: {
-          Authorization: `Bearer ${user.data.token}`,
-        },
-        method: "GET",
-        mode: "cors",
-      });
-      const data = await response.json();
-      loadSearchedMoviesHandler(data);
+      if (!CheckExpirationTime()) {
+        const response = await fetch("/movie/owned/like?title=" + searchText, {
+          headers: {
+            Authorization: `Bearer ${user.data.token}`,
+          },
+          method: "GET",
+          mode: "cors",
+        });
+        const data = await response.json();
+        loadSearchedMoviesHandler(data);
+      }
     } else {
-      const response = await fetch("/movie/like?title=" + searchText);
-      const data = await response.json();
-      loadSearchedMoviesHandler(data);
+      if (!CheckExpirationTime()) {
+        const response = await fetch("/movie/like?title=" + searchText);
+        const data = await response.json();
+        loadSearchedMoviesHandler(data);
+      }
     }
   };
 
@@ -116,7 +141,6 @@ function Navbar({
 
   useEffect(() => {
     CheckExpiredToken();
-
     const populateTokenPayload = () => {
       if (user) {
         const decodedPayload = getPayload(user.data.token);
@@ -124,7 +148,7 @@ function Navbar({
       }
     };
     populateTokenPayload();
-  }, [CheckExpiredToken]);
+  }, [CheckExpiredToken, user]);
 
   return (
     <header className="header">
@@ -138,6 +162,15 @@ function Navbar({
           <ul className="nav__list">
             {searchBarActive ? (
               <li className="nav__item nav__item_search">
+                {CheckExpirationTime() && enterPressed ? (
+                  <CustomFlashMessage
+                    message="Token expired!"
+                    customClassName="flash-message danger"
+                  />
+                ) : (
+                  <div></div>
+                )}
+
                 <input
                   type="text"
                   placeholder="Search movie by title"
