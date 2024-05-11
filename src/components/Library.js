@@ -22,8 +22,7 @@ function Library() {
       }
 
       const moviesData = await moviesRequest.json();
-      console.log(moviesRequest);
-      console.log(moviesData);
+
       setMovieCollection(moviesData);
     };
 

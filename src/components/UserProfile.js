@@ -69,7 +69,7 @@ function UserProfile() {
     setAttemptedToAddFunds(true);
     setTimeout(() => {
       setAttemptedToAddFunds(false);
-    }, 4000);
+    }, 2000);
 
     const data = new FormData();
     data.append("funds", fundsInput);
