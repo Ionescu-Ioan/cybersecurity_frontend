@@ -67,10 +67,8 @@ function UserProfile() {
   };
   const handleAddFunds = async () => {
     setAttemptedToAddFunds(true);
-    setTimeout(() => {
-      setAttemptedToAddFunds(false);
-    }, 2000);
 
+    setTimeout(2000);
     const data = new FormData();
     data.append("funds", fundsInput);
     const funds = await fetch("/user/add_funds", {
@@ -82,8 +80,7 @@ function UserProfile() {
       method: "POST",
       mode: "cors",
     });
-    inputElement.current.value = "";
-    setFundsInput("");
+
     const response = await funds.json();
 
     if (response.hasOwnProperty("err")) {
@@ -102,6 +99,9 @@ function UserProfile() {
         setSucceededToAddFunds(false);
       }, 2000);
     }
+    setAttemptedToAddFunds(false);
+    inputElement.current.value = "";
+    setFundsInput("");
 
     getUserData();
   };
@@ -143,7 +143,7 @@ function UserProfile() {
 
   useEffect(() => {
     getUserData();
-  }, []);
+  });
 
   return (
     <div className="profile-container">
@@ -179,14 +179,14 @@ function UserProfile() {
               src={profilePicURL}
               alt="profile picture"
               title="Your profile picture"
-            ></img>
+            />
             <br></br>
             <p>First name: {userData[0].first_name}</p>
             <p>Last name: {userData[0].last_name}</p>
             <p>Email: {userData[0].email}</p>
             <br></br>
 
-            <label for="myfile" title="Recommended picture size:300x200">
+            <label htmlFor="myfile" title="Recommended picture size:300x200">
               Select profile picture:
             </label>
             <input
