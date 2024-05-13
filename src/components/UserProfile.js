@@ -68,7 +68,6 @@ function UserProfile() {
   const handleAddFunds = async () => {
     setAttemptedToAddFunds(true);
 
-    setTimeout(2000);
     const data = new FormData();
     data.append("funds", fundsInput);
     const funds = await fetch("/user/add_funds", {
@@ -99,16 +98,17 @@ function UserProfile() {
         setSucceededToAddFunds(false);
       }, 2000);
     }
-    setAttemptedToAddFunds(false);
-    inputElement.current.value = "";
-    setFundsInput("");
+
+    setTimeout(() => {
+      setAttemptedToAddFunds(false);
+      inputElement.current.value = "";
+    }, 2000);
 
     getUserData();
   };
   const handleUploadProfilePic = (e) => {
     try {
       setProfilePic(e.target.files[0]);
-      console.log(e.target.files[0]);
     } catch (error) {
       console.log(error);
     }
