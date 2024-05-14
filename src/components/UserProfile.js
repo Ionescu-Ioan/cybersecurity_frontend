@@ -101,7 +101,9 @@ function UserProfile() {
 
     setTimeout(() => {
       setAttemptedToAddFunds(false);
-      inputElement.current.value = "";
+      if (inputElement.current) {
+        inputElement.current.value = "";
+      }
     }, 2000);
 
     getUserData();
