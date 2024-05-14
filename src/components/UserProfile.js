@@ -103,6 +103,7 @@ function UserProfile() {
       setAttemptedToAddFunds(false);
       if (inputElement.current) {
         inputElement.current.value = "";
+        setFundsInput("");
       }
     }, 2000);
 
@@ -145,7 +146,7 @@ function UserProfile() {
 
   useEffect(() => {
     getUserData();
-  });
+  },[succeededToAddFunds, succeededToUploadPic]);
 
   return (
     <div className="profile-container">
